@@ -37,11 +37,11 @@ Estamos buscando colaboradores apaixonados para construir este futuro. Ajude a m
 
 **Como Colaborar:**
 
-* Leia o [Manual do Arquiteto Zen](https://MzMagaiver.github.io/mzm-method/manual/). # <<< AJUSTADO para SEU site
-* Explore nossos [Exemplos](https://MzMagaiver.github.io/mzm-method/examples/). # <<< AJUSTADO para SEU site
-* Visite nosso [Site Completo](https://MzMagaiver.github.io/mzm-method/). # <<< AJUSTADO para SEU site
-* Explore o Código no [Repositório GitHub](https://github.com/MzMagaiver/mzm-method/). # <<< AJUSTADO para SEU repositório
-* [Entre em Contato ou Participe das Discussões](https://github.com/MzMagaiver/mzm-method/discussions). # <<< AJUSTADO para SEU repositório
+* Leia o [Manual do Arquiteto Zen](https://MzMagaiver.github.io/mzm-method/manual/).
+* Explore nossos [Exemplos](https://MzMagaiver.github.io/mzm-method/examples/). 
+* Visite nosso [Site Completo](https://MzMagaiver.github.io/mzm-method/).
+* Explore o Código no [Repositório GitHub](https://github.com/MzMagaiver/mzm-method/).
+* [Entre em Contato ou Participe das Discussões](https://github.com/MzMagaiver/mzm-method/discussions).
 
 **Precisamos de ajuda com:** Desenvolvimento (Python, Frontend, etc.), Modelagem, Documentação, Testes.
 
