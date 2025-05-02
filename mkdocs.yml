@@ -86,7 +86,8 @@ plugins:
   # Por enquanto, podemos incluir os arquivos .mzm como blocos de código simples no Markdown.
   # Se necessário, pode-se usar 'pymdownx.highlight' no markdown_extensions abaixo e configurar no tema.
   - include-markdown # Permite incluir outros arquivos markdown. (pip install mkdocs-include-markdown-plugin)
-  - scm: {} # <<< Referência ao plugin SCM embutido CORRIGIDA
+  # O plugin 'scm' foi removido temporariamente para resolver um erro de build.
+  # - scm: {} # <<< ESTA LINHA FOI REMOVIDA TEMPORARIAMENTE
 
 # --- Extensões de Markdown (Opcional) ---
 
