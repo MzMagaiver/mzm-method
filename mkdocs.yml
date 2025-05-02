@@ -7,17 +7,16 @@
 site_name: Método MZ-M: Modelagem Zen de Sistemas
 
 # A URL base onde o site será hospedado (Placeholder - ajustar no GitHub Pages)
-# Exemplo: https://seuusuario.github.io/mzm-method/
-site_url: https://<seu-usuario>.github.io/mzm-method/
+site_url: https://github.com/MzMagaiver/mzm-method/
 
 # URL do repositório GitHub. Usado para links como "Edit on GitHub" ou ícones.
-repo_url: https://github.com/<seu-usuario>/mzm-method/
+repo_url: https://github.com/MzMagaiver/mzm-method/
 
 # Nome do repositório (opcional, mas útil para o tema)
-repo_name: <seu-usuario>/mzm-method
+repo_name: https://github.com/MzMagaiver/mzm-method
 
 # Copyright (opcional)
-copyright: 'Copyright &copy; 2023 - 2025 <Seu Nome/Nome da Organização>'
+copyright: 'Copyright &copy; 2023 - 2025 <MAgaiver/MZM>'
 
 # --- Configurações do Tema ---
 
@@ -69,7 +68,7 @@ nav:
   - Playground Online: https://<link-para-seu-playground-quando-pronto> # Placeholder!
 
   # Repositório GitHub (Link direto)
-  - Repositório GitHub: https://github.com/<seu-usuario>/mzm-method/ # Link direto para o código
+  - Repositório GitHub: https://github.com/MzMagaiver/mzm-method
 
 # --- Configurações de Plugins (Opcional, Mas Útil) ---
 
