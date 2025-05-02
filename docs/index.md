@@ -29,26 +29,32 @@ entities:
       - rule: "common.string_min_length"
         params: { value: "senhaHash", min: 8 }
 
+
 As regras (common.email_valido, common.string_min_length) vêm do Repositório de Regras Comuns.
 🛠️ Toolkit MZ-M
 Ferramentas disponíveis no MVP:
 
+
 ✅ Linter de Intenções: Validação da lógica .mzm.
 📚 Repositório de Regras Comuns: Reutilização lógica sem esforço.
 🔁 Tradutor MZ-M → Código: Gere código em sua linguagem preferida.
-🌐 Playground Online (em breve).
+🌐Playground Online (em breve).
+
 
 🔗 Acesse o Playground MZ-M OnlineNota: Link será atualizado quando o playground estiver disponível.
 🚀 Visão de Futuro
 Nosso roteiro inclui:
+
 
 Integração com qualquer framework.
 Execução com rastreabilidade semântica.
 Evolução lógica assistida por IA.
 Marketplace de componentes reutilizáveis.
 
+
 🤝 Junte-se à Revolução
 Buscamos colaboradores para:
+
 
 Desenvolvimento (Python, Go, JavaScript).
 Criação de exemplos e docs.
@@ -56,15 +62,21 @@ Feedback e testes iniciais.
 
 Benefícios:
 
+
 Projeto open source com alto impacto.
 Aprendizado em modelagem formal.
 Participação em comunidade inovadora.
 
 📌 Próximos Passos
 
+
 🔍 Explore o código no GitHub
+
 📘 Leia o Manual do Arquiteto Zen
+
 💬 Participe das discussõesNota: Link será ajustado para a seção Discussions do repositório.
+
 🎮 Teste o PlaygroundNota: Link será atualizado quando o playground estiver disponível.
+
 
 Transforme seu sistema com uma mente clara e sólida.O futuro da lógica de negócio começa com o MZ-M.
