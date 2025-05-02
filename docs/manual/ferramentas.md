@@ -11,7 +11,7 @@ O Linter de Intenções é a primeira linha de defesa contra erros no seu modelo
 * **Propósito:** Validar a correção dos arquivos `.mzm` *antes* que eles sejam processados pelo Motor completo ou usados para gerar código.
 * **Como Funciona:**
     * Lê seus arquivos `.mzm`.
-    * Utiliza o [schema formal da Gramática MZ-M](/grammar/mzm_grammar_schema.cue) (baseado em CUE) para verificar a estrutura e os tipos de dados.
+    * Utiliza o [schema formal da Gramática MZ-M](grammar/mzm_grammar_schema.cue) (baseado em CUE) para verificar a estrutura e os tipos de dados.
     * Verifica se todos os elementos referenciados (regras usadas, intenções disparadas, itens de contexto requeridos) foram declarados no modelo ou importados.
     * Realiza validações básicas de consistência semântica (Ex: verifica se os parâmetros fornecidos para uma regra correspondem ao seu schema esperado).
     * Reporta erros (problemas que impedem a validade do modelo) e avisos (potenciais problemas ou inconsistências que merecem atenção) com a localização precisa no arquivo (`linha:coluna`).
