@@ -23,9 +23,9 @@ nav:
       - A Visão Completa: manual/visao-completa.md
   - Exemplos:
       - Introdução aos Exemplos: examples/index.md
-      - Exemplo 1: Invariantes: examples/usuario_invariants.mzm
-      - Exemplo 2: Intenção/Contrato: examples/usuario_login.mzm
-      - Exemplo 3: Causalidade: examples/usuario_causalidade.mzm
+      - "Exemplo 1: Invariantes": examples/usuario_invariants.mzm
+      - "Exemplo 2: Intenção/Contrato": examples/usuario_login.mzm
+      - "Exemplo 3: Causalidade": examples/usuario_causalidade.mzm
   - Playground Online: "https://<link-para-seu-playground-quando-pronto>"
   - Repositório GitHub: "https://github.com/MzMagaiver/mzm-method/"
 
