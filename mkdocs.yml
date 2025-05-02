@@ -1,114 +1,64 @@
 # Arquivo: mkdocs.yml
-#
-# Configuração base para o site de documentação e divulgação do Método MZ-M.
-# LOCAL: Raiz do Repositório
+# Configuração base para o site de documentação do Método MZ-M
 
 # --- Configurações Básicas do Site ---
-
-# O nome do seu projeto. Aparecerá no título do site.
 site_name: Método MZ-M: Modelagem Zen de Sistemas
-
-# A URL base onde o site será hospedado (Ajuste conforme sua URL real do GitHub Pages)
-# Exemplo: https://seunome.github.io/nome-do-repo/
-# A URL completa DEVE estar entre aspas simples ou duplas.
-site_url: 'https://MzMagaiver.github.io/mzm-method/' # <<< CORRIGIDO com aspas
-
-# URL do repositório GitHub. Usado para links como "Edit on GitHub" ou ícones.
-# A URL completa DEVE estar entre aspas simples ou duplas.
-repo_url: 'https://github.com/MzMagaiver/mzm-method/' # <<< CORRIGIDO com aspas
-
-# Nome do repositório (opcional, mas útil para o tema)
+site_url: 'https://MzMagaiver.github.io/mzm-method/'
+repo_url: https://github.com/MzMagaiver/mzm-method/
 repo_name: MzMagaiver/mzm-method
-
-# Copyright (opcional)
-copyright: 'Copyright &copy; 2023 - 2025 MzMagaiver'
+copyright: 'Copyright © 2023 - 2025 MzMagaiver'
 
 # --- Configurações do Tema ---
-
-# Usaremos o tema Material para MkDocs, que é popular e visualmente atraente.
 theme:
-  name: material # Instale com 'pip install mkdocs-material'
-
-  # Cores do tema (opcional, personalize!)
+  name: material
   palette:
-    primary: 'Deep Purple' # Cor principal
-    accent: 'Light Blue'   # Cor de destaque
-
-  # Ícones (opcional, requer configuração no tema Material)
-  # icons:
-  #   repo: fontawesome/brands/github
-
-  # Recursos (opcional, habilita funcionalidades do tema)
+    primary: 'Deep Purple'
+    accent: 'Light Blue'
   features:
-    - navigation.tabs # Navegação principal como abas no topo
-    - navigation.instant # Carregamento instantâneo de páginas
-    # - toc.integrate # Integrar ToC na navegação lateral
+    - navigation.tabs
+    - navigation.instant
+    # - toc.integrate
 
-# --- Configurações de Navegação (O Coração do Site) ---
-
-# Define a estrutura de navegação do site, mapeando nomes para arquivos Markdown.
-# Os caminhos dos arquivos (.md, .mzm) são relativos à pasta 'docs/'.
+# --- Configurações de Navegação ---
 nav:
-  - Home: index.md # A página principal (nosso pitch matador)
+  - Home: index.md
 
-  # Manual do Arquiteto Zen - Organizado em seções
   - Manual do Arquiteto Zen:
-    - Introdução: manual/introducao.md
-    - A Gramática MZ-M: manual/gramatica.md
-    - Ferramentas Essenciais: manual/ferramentas.md
-    - Runtime e Rastreabilidade: manual/runtime.md
-    - A Visão Completa: manual/visao-completa.md
+      - Introdução: manual/introducao.md
+      - A Gramática MZ-M: manual/gramatica.md
+      - Ferramentas Essenciais: manual/ferramentas.md
+      - Runtime e Rastreabilidade: manual/runtime.md
+      - A Visão Completa: manual/visao-completa.md
 
-  # Exemplos de Modelos MZ-M
   - Exemplos:
-    # Criaremos um arquivo index.md na pasta examples/ para listar os exemplos
-    - Introdução aos Exemplos: examples/index.md # Precisamos criar este arquivo
-    # Links diretos para os arquivos .mzm (serão exibidos como código no site)
-    - Exemplo 1: Invariantes: examples/usuario_invariants.mzm
-    - Exemplo 2: Intenção/Contrato: examples/usuario_login.mzm
-    - Exemplo 3: Causalidade: examples/usuario_causalidade.mzm
+      - Introdução aos Exemplos: examples/index.md
+      - Exemplo 1: Invariantes: examples/usuario_invariants.mzm
+      - Exemplo 2: Intenção/Contrato: examples/usuario_login.mzm
+      - Exemplo 3: Causalidade: examples/usuario_causalidade.mzm
 
-  # Playground Online (Link Externo ou Interno futuro)
-  # Quando o playground estiver pronto, este item levará a ele.
-  # Por enquanto, pode ser um link para a seção no Manual ou uma página 'Em Breve'.
-  - Playground Online: 'https://<link-para-seu-playground-quando-pronto>' # <<< CORRIGIDO com aspas
+  - Playground Online: https://<link-para-seu-playground-quando-pronto>
+  - Repositório GitHub: https://github.com/MzMagaiver/mzm-method/
 
-  # Repositório GitHub (Link direto)
-  # A URL completa DEVE estar entre aspas simples ou duplas.
-  - Repositório GitHub: 'https://github.com/MzMagaiver/mzm-method/' # <<< CORRIGIDO com aspas
-
-# --- Configurações de Plugins (Opcional, Mas Útil) ---
-
-# Habilita plugins para funcionalidades extras.
+# --- Plugins ---
 plugins:
-  # Adicionar plugin para renderizar código CUE com sintaxe highlighting correta (precisa encontrar/criar um)
-  # ou usar um plugin que permite incluir arquivos no markdown.
-  # Por enquanto, podemos incluir os arquivos .mzm como blocos de código simples no Markdown.
-  # Se necessário, pode-se usar 'pymdownx.highlight' no markdown_extensions abaixo e configurar no tema.
-  - include-markdown # Permite incluir outros arquivos markdown. (pip install mkdocs-include-markdown-plugin)
-  - mkdocs.plugins.scm: {} # Inclui informações de SCM (commit, etc.)
+  - include-markdown
+  - mkdocs.plugins.scm: {}
 
-
-# --- Extensões de Markdown (Opcional) ---
-
-# Habilita extensões para funcionalidades extras no Markdown (tabelas, notas de rodapé, etc.)
+# --- Extensões de Markdown ---
 markdown_extensions:
-  - admonition # Blocos de "Nota", "Aviso", etc.
-  - pymdownx.highlight: # Sintaxe highlighting
+  - admonition
+  - pymdownx.highlight:
       anchor_ln: true
-  - pymdownx.superfences # Blocos de código aninhados
-  - pymdownx.details # Blocos de detalhes retráteis
-  - pymdownx.snippets: # Incluir snippets de código de arquivos externos
-      base_path: # <<< SINTAXE CORRIGIDA aqui. 'base_path' é uma chave.
-        - '.' # Estes são os itens da lista de 'base_path'.
+  - pymdownx.superfences
+  - pymdownx.details
+  - pymdownx.snippets:
+      base_path:
+        - '.'
         - '../grammar'
         - '../tools'
         - '../common_rules_repo/rules'
         - '../examples'
 
-# --- Configurações de Deploy (Usado pelo GitHub Actions) ---
+# --- Configurações de Deploy ---
 # remote_branch: gh-pages
 # site_dir: site
-
-# Nota: As configurações de deploy específicas podem depender da ação de GitHub Actions utilizada.
-# A ação 'peaceiris/actions-gh-pages@v4' geralmente gerencia estes detalhes para você.
