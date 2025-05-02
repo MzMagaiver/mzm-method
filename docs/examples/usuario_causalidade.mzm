@@ -1,0 +1,113 @@
+// Arquivo: docs/examples/usuario_causalidade.mzm
+// Exemplo 3: Modelando a reação ao evento de Login Bem Sucedido.
+// Demonstra Geometria Causal (Relações), Condições de Contexto (when_context), Efeitos Causais (disparar Intenção).
+
+mzm_version: "1.0"
+domain: "usuario"
+
+imports: {
+  common: "repo://mzm-common-rules-repo/v1" # Regras comuns (se alguma regra usada em when_context vier de lá)
+  usuario: "./usuario_login.mzm" # Importa as definições do arquivo de login (incluindo Evento LoginDeUsuarioBemSucedido, estados Usuario)
+  # Você pode importar a Intenção EnviarEmailBoasVindas se ela for definida em outro arquivo .mzm
+  # Ex: notificacoes: "./notificacoes.mzm"
+}
+
+// --- Seção de Contexto ---
+// Declara itens de contexto que são necessários para as condições 'when_context' ou efeitos 'cause'
+context: {
+  // Item de contexto para checar se as notificações por email estão ativas no sistema.
+  configuracoes_notificacao: #ContextItem & {
+    description: "Configurações globais sobre o status das notificações (Ex: email ativo, push ativo)."
+    source_ref: "config.system.notifications" # Como obter estas configs em runtime
+    # schema: { email_ativo: bool, push_ativo: bool } # Exemplo de schema para validação de consistência
+  }
+
+  // Item de contexto para checar se este é o primeiro login do usuário.
+  // Poderia ser um campo derivado do objeto usuário no contexto, ou uma regra específica que o determina.
+  usuario_primeiro_login: #ContextItem & {
+      description: "Indica se este é o primeiro login do usuário (baseado em dados de execução ou histórico persistido). A regra 'eh_primeiro_login_usuario' usa este item."
+      source_ref: "context.user_session.is_first_login" # Exemplo de source_ref (middleware injetaria)
+      schema: bool # Espera um valor booleano
+  }
+}
+
+// --- Seção de Regras ---
+// Define regras usadas especificamente nas condições 'when_context' ou em efeitos 'cause' que chamam regras.
+rules: {
+  // Regra para verificar se notificações por email estão ativas no contexto.
+  notificacoes_email_ativas: #Regra & {
+    description: "Verifica se as notificações por email estão ativas nas configurações do sistema (contexto)."
+    params_schema: {} # Não precisa de params, só de contexto
+    requires_context: ["configuracoes_notificacao"] # Precisa do item de contexto de configurações
+    implementation_ref: { python: "domain.sistema.rules.email_notifications_active" } # Implementação verifica o item de contexto
+  }
+
+  // Regra para verificar se é o primeiro login do usuário no contexto.
+   eh_primeiro_login_usuario: #Regra & {
+       description: "Verifica se o item de contexto 'usuario_primeiro_login' é verdadeiro."
+       params_schema: {} # Não precisa de params
+       requires_context: ["usuario_primeiro_login"] # Precisa do item de contexto 'usuario_primeiro_login'
+       implementation_ref: { python: "domain.usuario.rules.is_first_login" } # Implementação verifica o item de contexto
+   }
+}
+
+// --- Seção de Intenções ---
+# Esta seção pode estar vazia neste arquivo se ele apenas orquestra causalidade,
+# mas pode referenciar Intenções definidas em outros arquivos (.mzm importados)
+# ou Intenções definidas localmente se este arquivo as disparar.
+intentions: {
+    # Exemplo: Definição local da Intenção disparada por uma Relação Causal neste arquivo.
+    # Isso é menos comum; geralmente a Intenção já existiria e seria importada.
+    # EnviarEmailBoasVindas: #Intencao & { ... }
+}
+
+// --- Seção de Geometria Causal ---
+# Define os eventos, estados e as relações que moldam a dinâmica do sistema.
+causal_geometry: {
+  # Declaração de eventos e estados (podem ser importados de outros arquivos .mzm)
+  events: {} # Vazio, pois o evento LoginDeUsuarioBemSucedido é importado de usuario_login.mzm
+  states: {} # Vazio, pois os estados Usuario são importados de usuario_login.mzm
+
+  relations: [
+    // Uma Relação Causal: Define como o sistema reage a um evento sob certas condições.
+    {
+      # O nome do Evento que dispara esta relação causal.
+      on_event: "usuario.LoginDeUsuarioBemSucedido" # Referencia o evento importado do arquivo de login
+
+      # As Condições de Contexto: Regras ou checagens no Contexto Vivo que devem ser verdadeiras
+      # para que os efeitos (cause) desta relação sejam executados.
+      when_context: {
+         # Aqui usamos as regras definidas acima que dependem de itens de contexto.
+         # A estrutura interna pode ser simples { rule: "nome_regra", params: {} } ou aninhada para lógica AND/OR complexa.
+         # MkDocs pode ter problemas com sintaxe CUE complexa dentro de blocos de código, simplificar para a doc.
+         "notificacoes_email_ativas": { rule: "notificacoes_email_ativas", params: {} }, # As notificações por email devem estar ativas.
+         "eh_primeiro_login_usuario": { rule: "eh_primeiro_login_usuario", params: {} } # Deve ser o primeiro login do usuário.
+         # Use lógica CUE para combinar:
+         # e: { notificacoes_email_ativas: {...}, eh_primeiro_login_usuario: {...} } # Lógica AND padrão do CUE
+         # ou: [ { notifacoes_email_ativas: {...} }, { eh_primeiro_login_usuario: {...} } ] # Lógica OR (requer schema específico ou plugin)
+      }
+
+      # A lista de Efeitos (cause) que esta relação causal provoca se 'when_context' for verdadeiro.
+      cause: [
+        # Exemplo de Efeito: Disparar outra Intenção.
+        {
+          intention_trigger: "EnviarEmailBoasVindas", # Nome da Intenção a ser disparada (deve existir ou ser importada).
+          # Parâmetros de input para a Intenção disparada. Podem vir do payload do evento disparador, input da intenção original, ou contexto.
+          params: {
+             email: "event.payload.email" # Pega o email do payload do evento LoginDeUsuarioBemSucedido
+             # user_id: "event.payload.user_id" # Pega o user_id do payload
+             # config: "context.configuracoes_notificacao" # Passa um item de contexto
+          }
+        }
+        # Exemplo de Efeito: Mudar o estado de uma Entidade.
+        # { state_transition: "Usuario.Estado -> 'BemVindo'", params: { user_id: "event.payload.user_id" } } # Altera o estado do usuário no sistema de persistência.
+        # Exemplo de Efeito Direto (chamada a um serviço/função semântica genérica).
+        # { effect: "LogUserFirstLogin", params: { user_id: "event.payload.user_id" } } # Chama uma função de logging específica.
+      ]
+    }
+    # Adicionar outras relações causais para outros eventos ou outras reações ao mesmo evento com when_context diferente.
+  ]
+}
+
+# Seções vazias ou não usadas explicitamente neste arquivo de exemplo para foco.
+# entities: {}
