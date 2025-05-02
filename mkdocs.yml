@@ -58,12 +58,12 @@ nav:
 
   # Exemplos de Modelos MZ-M
   - "Exemplos": # Este é o item principal na navegação
-    # O link para a introdução dos exemplos (o arquivo que criamos agora)
-    - "Introdução aos Exemplos": "examples/index.md" # <<< Caminho para o novo arquivo
-    # Links diretos para os arquivos .mzm (serão exibidos como código no site)
-    - "Exemplo 1: Invariantes": "examples/usuario_invariants.mzm"
-    - "Exemplo 2: Intenção/Contrato": "examples/usuario_login.mzm"
-    - "Exemplo 3: Causalidade": "examples/usuario_causalidade.mzm"
+    # O link para a introdução dos exemplos (o arquivo que já existe)
+    - "Introdução aos Exemplos": "examples/index.md"
+    # Links para as novas páginas .md que exibem o código .mzm
+    - "Exemplo 1: Invariantes": "examples/usuario_invariants.md" # <<< Aponta para o novo .md
+    - "Exemplo 2: Intenção/Contrato": "examples/usuario_login.md" # <<< Aponta para o novo .md
+    - "Exemplo 3: Causalidade": "examples/usuario_causalidade.md" # <<< Aponta para o novo .md
 
   # Playground Online (Link Externo ou Interno futuro)
   - "Playground Online": "https://<link-para-seu-playground-quando-pronto>" # Lembre-se de ajustar este link!
