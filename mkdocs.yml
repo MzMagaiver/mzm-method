@@ -1,16 +1,8 @@
-# Arquivo: mkdocs.yml
-# Configuração base para o site de documentação e divulgação do Método MZ-M.
-# LOCAL: Raiz do Repositório
-
-# --- Configurações Básicas do Site ---
-
 site_name: "Método MZ-M: Modelagem Zen de Sistemas"
 site_url: "https://MzMagaiver.github.io/mzm-method/"
 repo_url: "https://github.com/MzMagaiver/mzm-method/"
 repo_name: "MzMagaiver/mzm-method"
 copyright: "Copyright © 2023 - 2025 MzMagaiver"
-
-# --- Configurações do Tema ---
 
 theme:
   name: "material"
@@ -20,8 +12,6 @@ theme:
   features:
     - navigation.tabs
     - navigation.instant
-
-# --- Configurações de Navegação ---
 
 nav:
   - Home: index.md
@@ -39,13 +29,9 @@ nav:
   - Playground Online: "https://<link-para-seu-playground-quando-pronto>"
   - Repositório GitHub: "https://github.com/MzMagaiver/mzm-method/"
 
-# --- Configurações de Plugins ---
-
 plugins:
   - include-markdown
-  - mkdocs.plugins.scm
-
-# --- Extensões de Markdown ---
+  - mkdocs.plugins.scm: {}
 
 markdown_extensions:
   - admonition
