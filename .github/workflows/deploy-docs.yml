@@ -63,7 +63,7 @@ jobs:
           source .venv/bin/activate # Ativa o ambiente virtual
 
       # Passo 4: Instalar as dependências do MkDocs e Tema e Plugins no Ambiente Virtual
-      # Instala as dependências listadas no requirements.txt.
+      # Instala as dependências listadas no requirements.txt (que NÃO inclui mkdocs-static-files agora).
       # O comando 'pip install' rodará dentro do ambiente virtual ativo.
       - name: Instalar MkDocs e Tema e Plugins
         run: |
@@ -88,7 +88,7 @@ jobs:
         uses: actions/configure-pages@v5 # Usando a versão v5.
 
       # Passo 7: Fazer Upload do Artefato do Site (APONTANDO PARA A PASTA CORRETA)
-      # Usa a ação oficial para fazer upload da pasta 'site/' como um artefato nomeado 'github-pages'.
+      # Usa a ação oficial para acionar o upload da pasta 'site/' como um artefato nomeado 'github-pages'.
       # É CRUCIAL que 'path' aponte para a pasta onde o MkDocs construiu o site.
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
@@ -106,4 +106,3 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment # Atribui um ID para referenciar outputs (como a URL do site)
         uses: actions/deploy-pages@v4 # Usa a ação de deploy final.
-
