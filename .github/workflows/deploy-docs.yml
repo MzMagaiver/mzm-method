@@ -47,8 +47,11 @@ jobs:
           pip install mkdocs==1.5.3 # Fixa a versão para estabilidade (opcional)
           pip install mkdocs-material==9.5.20 # Fixa a versão do tema (opcional)
           # Instale outros plugins usados no mkdocs.yml aqui:
-          pip install mkdocs-include-markdown-plugin # <<< Plugin include-markdown
-          pip install mkdocs-plugin-scm # <<< Plugin scm
+          pip install mkdocs-include-markdown-plugin # <<< Este plugin deve permanecer
+
+          # O plugin mkdocs.plugins.scm é geralmente incluído com o MkDocs e não precisa ser instalado separadamente.
+          # pip install mkdocs-plugin-scm # <<< ESTA LINHA FOI REMOVIDA
+
           # Se você adicionar outros plugins no futuro, instale-os aqui também.
 
       # Passo 4: Construir o Site MkDocs
