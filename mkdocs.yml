@@ -1,50 +1,52 @@
 # Arquivo: mkdocs.yml
-# Configuração base para o site de documentação do Método MZ-M
+# Configuração base para o site de documentação e divulgação do Método MZ-M.
+# LOCAL: Raiz do Repositório
 
 # --- Configurações Básicas do Site ---
-site_name: Método MZ-M: Modelagem Zen de Sistemas
-site_url: 'https://MzMagaiver.github.io/mzm-method/'
-repo_url: https://github.com/MzMagaiver/mzm-method/
-repo_name: MzMagaiver/mzm-method
-copyright: Copyright (c) 2023 - 2025 MzMagaiver
+
+site_name: "Método MZ-M: Modelagem Zen de Sistemas"
+site_url: "https://MzMagaiver.github.io/mzm-method/"
+repo_url: "https://github.com/MzMagaiver/mzm-method/"
+repo_name: "MzMagaiver/mzm-method"
+copyright: "Copyright © 2023 - 2025 MzMagaiver"
 
 # --- Configurações do Tema ---
+
 theme:
-  name: material
+  name: "material"
   palette:
-    primary: 'Deep Purple'
-    accent: 'Light Blue'
+    primary: "Deep Purple"
+    accent: "Light Blue"
   features:
     - navigation.tabs
     - navigation.instant
-    # - toc.integrate
 
 # --- Configurações de Navegação ---
+
 nav:
   - Home: index.md
-
   - Manual do Arquiteto Zen:
       - Introdução: manual/introducao.md
       - A Gramática MZ-M: manual/gramatica.md
       - Ferramentas Essenciais: manual/ferramentas.md
       - Runtime e Rastreabilidade: manual/runtime.md
       - A Visão Completa: manual/visao-completa.md
-
   - Exemplos:
       - Introdução aos Exemplos: examples/index.md
       - Exemplo 1: Invariantes: examples/usuario_invariants.mzm
       - Exemplo 2: Intenção/Contrato: examples/usuario_login.mzm
       - Exemplo 3: Causalidade: examples/usuario_causalidade.mzm
+  - Playground Online: "https://<link-para-seu-playground-quando-pronto>"
+  - Repositório GitHub: "https://github.com/MzMagaiver/mzm-method/"
 
-  - Playground Online: https://<link-para-seu-playground-quando-pronto>
-  - Repositório GitHub: https://github.com/MzMagaiver/mzm-method/
+# --- Configurações de Plugins ---
 
-# --- Plugins ---
 plugins:
   - include-markdown
-  - mkdocs.plugins.scm: {}
+  - mkdocs.plugins.scm
 
 # --- Extensões de Markdown ---
+
 markdown_extensions:
   - admonition
   - pymdownx.highlight:
@@ -53,12 +55,8 @@ markdown_extensions:
   - pymdownx.details
   - pymdownx.snippets:
       base_path:
-        - '.'
-        - '../grammar'
-        - '../tools'
-        - '../common_rules_repo/rules'
-        - '../examples'
-
-# --- Configurações de Deploy ---
-# remote_branch: gh-pages
-# site_dir: site
+        - "."
+        - "../grammar"
+        - "../tools"
+        - "../common_rules_repo/rules"
+        - "../examples"
