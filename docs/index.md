@@ -8,18 +8,30 @@ Bugs na lógica são constantes?
 O onboarding de novos membros é um desafio?
 
 O Método MZ-M (Modelagem Zen de Sistemas) propõe um novo paradigma: em vez de apenas codificar, modelamos a lógica de negócio formalmente — com clareza, solidez e rastreabilidade.
+
 ✨ O que é o Método MZ-M?
+
 Uma abordagem moderna e formal para lógica de negócio, baseada em 5 pilares:
 
-Solidez por Design: A lógica modelada é formalmente verificável. Capture bugs antes do deploy, não em produção.
+Solidez por Design: A lógica modelada é formalmente verificável. 
+
+Capture bugs antes do deploy, não em produção.
+
 Clareza e Alfabetização Digital: A linguagem .mzm é legível por humanos e auto-documentável.
+
 Rastreabilidade Semântica: Entenda exatamente por que seu sistema se comportou de uma certa maneira.
+
 Foco no Desenvolvedor: Ferramentas eliminam boilerplate e aumentam a produtividade.
+
 Metacognição e Evolução Assistida: Construa sistemas que se analisam e evoluem com auxílio da IA (visão futura).
 
+
 🧾 A Linguagem .mzm
+
 A Linguagem de Intenção e Contrato permite descrever a lógica de negócio de forma declarativa.
-Exemplo: Definindo um Usuário
+Exemplo: 
+
+Definindo um Usuário
 entities:
   Usuario:
     description: "Representa um usuário do sistema."
@@ -31,17 +43,22 @@ entities:
 
 
 As regras (common.email_valido, common.string_min_length) vêm do Repositório de Regras Comuns.
+
 🛠️ Toolkit MZ-M
 Ferramentas disponíveis no MVP:
 
 
 ✅ Linter de Intenções: Validação da lógica .mzm.
+
 📚 Repositório de Regras Comuns: Reutilização lógica sem esforço.
+
 🔁 Tradutor MZ-M → Código: Gere código em sua linguagem preferida.
+
 🌐Playground Online (em breve).
 
 
 🔗 Acesse o Playground MZ-M OnlineNota: Link será atualizado quando o playground estiver disponível.
+
 🚀 Visão de Futuro
 Nosso roteiro inclui:
 
