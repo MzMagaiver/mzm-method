@@ -49,17 +49,17 @@ jobs:
 
       # Passo 2: Configurar o ambiente Python
       # Configura o Python no runner, necessário para instalar e rodar o MkDocs.
+      # CORRIGIDO: Especificando Python 3.12 para compatibilidade com mkdocs-static-files.
       - name: Configurar Python
         uses: actions/setup-python@v5
         with:
-          python-version: 3.x # Usa a versão mais recente do Python 3
+          python-version: 3.12 # <<< VERSÃO PYTHON CORRIGIDA AQUI
 
       # Passo 3: Instalar as dependências do MkDocs e Plugins
-      # Instala o MkDocs, o tema Material e todos os plugins necessários.
-      # Adicionamos 'mkdocs-static-files' aqui para garantir que ele seja instalado.
+      # Instala o MkDocs, o tema Material e todos os plugins necessários, incluindo mkdocs-static-files.
       - name: Instalar MkDocs e Tema e Plugins
         run: |
-          pip install mkdocs mkdocs-material==9.5.20 mkdocs-include-markdown-plugin mkdocs-static-files # <<< PLUGIN STATIC FILES ADICIONADO AQUI
+          pip install mkdocs mkdocs-material==9.5.20 mkdocs-include-markdown-plugin mkdocs-static-files
           # O plugin mkdocs.plugins.scm (referenciado como 'scm' no mkdocs.yml)
           # é geralmente incluído com o MkDocs, mas causou um erro anterior.
           # Se você resolver o problema com o plugin 'scm' no futuro, pode precisar instalá-lo explicitamente aqui
