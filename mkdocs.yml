@@ -1,5 +1,7 @@
 # Arquivo: mkdocs.yml
+#
 # Configuração base para o site de documentação e divulgação do Método MZ-M.
+# LOCAL: Raiz do Repositório
 
 # --- Configurações Básicas do Site ---
 
@@ -7,16 +9,18 @@
 site_name: Método MZ-M: Modelagem Zen de Sistemas
 
 # A URL base onde o site será hospedado (Placeholder - ajustar no GitHub Pages)
-site_url: https://github.com/MzMagaiver/mzm-method/
+# Exemplo: https://seunome.github.io/nome-do-repo/
+# A URL completa DEVE estar entre aspas simples ou duplas para evitar erros de parsing YAML.
+site_url: 'https://MzMagaiver.github.io/mzm-method/' # <<< LINHA CORRIGIDA - URL do SEU site GitHub Pages
 
 # URL do repositório GitHub. Usado para links como "Edit on GitHub" ou ícones.
-repo_url: https://github.com/MzMagaiver/mzm-method/
+repo_url: https://github.com/MzMagaiver/mzm-method/ # <<< AJUSTADO para SEU repositório
 
 # Nome do repositório (opcional, mas útil para o tema)
-repo_name: https://github.com/MzMagaiver/mzm-method
+repo_name: MzMagaiver/mzm-method # <<< AJUSTADO para SEU repositório
 
 # Copyright (opcional)
-copyright: 'Copyright &copy; 2023 - 2025 <MAgaiver/MZM>'
+copyright: 'Copyright &copy; 2023 - 2025 MzMagaiver' # <<< AJUSTADO para SEU nome/repo
 
 # --- Configurações do Tema ---
 
@@ -42,6 +46,7 @@ theme:
 # --- Configurações de Navegação (O Coração do Site) ---
 
 # Define a estrutura de navegação do site, mapeando nomes para arquivos Markdown.
+# Os caminhos dos arquivos (.md, .mzm) são relativos à pasta 'docs/'.
 nav:
   - Home: index.md # A página principal (nosso pitch matador)
 
@@ -65,10 +70,10 @@ nav:
   # Playground Online (Link Externo ou Interno futuro)
   # Quando o playground estiver pronto, este item levará a ele.
   # Por enquanto, pode ser um link para a seção no Manual ou uma página 'Em Breve'.
-  - Playground Online: https://<link-para-seu-playground-quando-pronto> # Placeholder!
+  - Playground Online: https://<link-para-seu-playground-quando-pronto> # Placeholder! AJUSTAR QUANDO TIVER O LINK DO PLAYGROUND
 
   # Repositório GitHub (Link direto)
-  - Repositório GitHub: https://github.com/MzMagaiver/mzm-method
+  - Repositório GitHub: https://github.com/MzMagaiver/mzm-method/ # <<< AJUSTADO para SEU repositório
 
 # --- Configurações de Plugins (Opcional, Mas Útil) ---
 
