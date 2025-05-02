@@ -61,9 +61,9 @@ nav:
     # O link para a introdução dos exemplos (o arquivo que já existe)
     - "Introdução aos Exemplos": "examples/index.md"
     # Links para as novas páginas .md que exibem o código .mzm
-    - "Exemplo 1: Invariantes": "examples/usuario_invariants.md" # <<< Aponta para o novo .md
-    - "Exemplo 2: Intenção/Contrato": "examples/usuario_login.md" # <<< Aponta para o novo .md
-    - "Exemplo 3: Causalidade": "examples/usuario_causalidade.md" # <<< Aponta para o novo .md
+    - "Exemplo 1: Invariantes": "examples/usuario_invariants.md"
+    - "Exemplo 2: Intenção/Contrato": "examples/usuario_login.md"
+    - "Exemplo 3: Causalidade": "examples/usuario_causalidade.md"
 
   # Playground Online (Link Externo ou Interno futuro)
   - "Playground Online": "https://<link-para-seu-playground-quando-pronto>" # Lembre-se de ajustar este link!
@@ -81,6 +81,13 @@ plugins:
   # Plugin para incluir conteúdo de outros arquivos Markdown
   - include-markdown
 
+  # Plugin para copiar arquivos estáticos de fora da pasta docs/
+  - static-files: # <<< NOVO PLUGIN AQUI
+      # Lista de arquivos/pastas a serem copiados, caminhos relativos à raiz do repositório
+      - 'grammar/' # Copia a pasta 'grammar' inteira para 'site/grammar/'
+      # Se houver outros arquivos/pastas fora de docs/ que você quer linkar diretamente, adicione-os aqui.
+      # Exemplo: - 'caminho/para/seu/arquivo.ext'
+
 # --- Extensões de Markdown (Opcional) ---
 
 # Habilita extensões para funcionalidades extras no Markdown (tabelas, notas de rodapé, etc.)
@@ -91,7 +98,7 @@ markdown_extensions:
   - pymdownx.superfences # Blocos de código aninhados
   - pymdownx.details # Blocos de detalhes retráteis
   - pymdownx.snippets: # Incluir snippets de código de arquivos externos
-      base_path: # Lista de caminhos base para procurar snippets
+      base_path: # Lista de caminhos base para procurar snippets (usado pelo {{ include }})
         - "."
         - "../grammar"
         - "../tools"
