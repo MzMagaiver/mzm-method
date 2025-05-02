@@ -2,6 +2,7 @@
 #
 # Workflow de GitHub Actions para construir e deployar o site MkDocs para GitHub Pages.
 # Aciona automaticamente em pushes para o branch principal.
+# LOCAL: .github/workflows/
 
 name: Deploy Docs via MkDocs
 
@@ -40,13 +41,14 @@ jobs:
           python-version: 3.x # Use a versão mais recente do Python 3
 
       # Passo 3: Instalar as dependências do MkDocs
-      # Instala o MkDocs e o tema que definimos no mkdocs.yml.
-      - name: Instalar MkDocs e Tema
+      # Instala o MkDocs e o tema que definimos no mkdocs.yml, mais outros plugins.
+      - name: Instalar MkDocs e Tema e Plugins
         run: |
           pip install mkdocs==1.5.3 # Fixa a versão para estabilidade (opcional)
           pip install mkdocs-material==9.5.20 # Fixa a versão do tema (opcional)
-          # Se usar outros plugins no mkdocs.yml, instale-os aqui também:
-          # pip install mkdocs-include-markdown-plugin
+          # Instale outros plugins usados no mkdocs.yml aqui:
+          pip install mkdocs-include-markdown-plugin # <<< LINHA ADICIONADA/DESCOMENTADA
+          # Se você adicionar outros plugins no futuro, instale-os aqui também.
 
       # Passo 4: Construir o Site MkDocs
       # Roda o comando mkdocs build, que lê o mkdocs.yml e os arquivos em /docs.
