@@ -63,7 +63,7 @@ jobs:
           source .venv/bin/activate # Ativa o ambiente virtual
 
       # Passo 4: Instalar as dependências do MkDocs e Tema e Plugins no Ambiente Virtual
-      # Instala as dependências listadas no requirements.txt (que NÃO inclui mkdocs-static-files agora).
+      # Instala as dependências listadas no requirements.txt.
       # O comando 'pip install' rodará dentro do ambiente virtual ativo.
       - name: Instalar MkDocs e Tema e Plugins
         run: |
@@ -82,12 +82,20 @@ jobs:
           source .venv/bin/activate # Garante que o ambiente virtual está ativo para este passo
           mkdocs build
 
-      # Passo 6: Configurar o GitHub Pages (usando a v5)
+      # Passo 6: Listar Conteúdo da Pasta Site (NOVO PASSO PARA DEBUG)
+      # Lista o conteúdo da pasta 'site/' para verificar se o arquivo .cue foi incluído.
+      - name: Listar Conteúdo da Pasta Site
+        run: |
+          echo "Listing contents of site/ directory:"
+          ls -R site/
+          echo "End of site/ directory listing."
+
+      # Passo 7: Configurar o GitHub Pages (usando a v5)
       # Este passo prepara o ambiente para o deploy no Pages.
       - name: Configurar GitHub Pages
         uses: actions/configure-pages@v5 # Usando a versão v5.
 
-      # Passo 7: Fazer Upload do Artefato do Site (APONTANDO PARA A PASTA CORRETA)
+      # Passo 8: Fazer Upload do Artefato do Site (APONTANDO PARA A PASTA CORRETA)
       # Usa a ação oficial para acionar o upload da pasta 'site/' como um artefato nomeado 'github-pages'.
       # É CRUCIAL que 'path' aponte para a pasta onde o MkDocs construiu o site.
       - name: Upload artifact
@@ -100,9 +108,10 @@ jobs:
           # Define por quantos dias o artefato será retido (opcional).
           retention-days: 1
 
-      # Passo 8: Fazer Deploy para GitHub Pages (Passo Final de Publicação)
+      # Passo 9: Fazer Deploy para GitHub Pages (Passo Final de Publicação)
       # Usa a ação oficial para acionar a publicação do artefato 'github-pages' no serviço de Pages.
       # Este passo é necessário quando a Source nas Pages Settings é 'GitHub Actions'.
       - name: Deploy to GitHub Pages
         id: deployment # Atribui um ID para referenciar outputs (como a URL do site)
         uses: actions/deploy-pages@v4 # Usa a ação de deploy final.
+
