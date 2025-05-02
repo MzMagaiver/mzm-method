@@ -19,7 +19,7 @@ causality: Mapeia relações causais entre intenções e eventos.
 🧩 Schema da Gramática
 Um arquivo schema CUE formaliza a gramática da linguagem MZ-M, permitindo a validação dos arquivos .mzm com precisão.
 
-📥 Baixar Schema da Gramática MZ-M
+📥 Baixar Schema da Gramática MZ-M [Baixar o Schema da Gramática MZ-M](grammar/mzm_grammar_schema.cue)
 
 Nota: o link acima é relativo e navega um nível acima para acessar a pasta grammar/.
 
