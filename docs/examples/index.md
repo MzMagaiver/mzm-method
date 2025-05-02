@@ -1,12 +1,12 @@
-Exemplos do Método MZ-M
-Bem-vindo à seção de exemplos do Método MZ-M.
-
+Exemplos do Método MZ-MBem-vindo à seção de exemplos do Método MZ-M.
 Aqui você encontrará modelos práticos escritos na linguagem .mzm que demonstram como modelar diferentes aspectos da lógica de negócio.
+Explore os exemplos na navegação lateral para ver o código e entender a abordagem do MZ-M na prática.Links para os 
+Exemplos:
 
-Explore os exemplos na navegação lateral para ver o código e entender a abordagem do MZ-M na prática.
+Exemplo 
 
-Exemplo 1: Invariantes
+1: InvariantesExemplo 
 
-Exemplo 2: Intenção/Contrato
+2: Intenção/ContratoExemplo 
 
-Exemplo 3: Causalidade
+3: Causalidade
