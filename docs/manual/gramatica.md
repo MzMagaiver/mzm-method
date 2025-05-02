@@ -4,7 +4,7 @@ A Gramática MZ-M define a estrutura e a sintaxe da Linguagem de Intenção e Co
 
 Embora a Gramática MZ-M utilize a sintaxe do CUE, ela foca em expressar **conceitos de lógica de negócio**: Entidades, Regras, Intenções, Contexto e Geometria Causal.
 
-A especificação formal completa da gramática está definida no arquivo [mzm_grammar_schema.cue](/grammar/mzm_grammar_schema.cue) no repositório. Este documento fornece uma visão de alto nível e exemplos.
+A especificação formal completa da gramática está definida no arquivo [mzm_grammar_schema.cue](grammar/mzm_grammar_schema.cue) no repositório. Este documento fornece uma visão de alto nível e exemplos.
 
 ## Estrutura de um Arquivo MZ-M (.mzm)
 
