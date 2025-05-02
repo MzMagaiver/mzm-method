@@ -1,0 +1,72 @@
+# Arquivo: .github/workflows/deploy-docs.yml
+#
+# Workflow de GitHub Actions para construir e deployar o site MkDocs para GitHub Pages.
+# Aciona automaticamente em pushes para o branch principal.
+
+name: Deploy Docs via MkDocs
+
+on:
+  push:
+    branches:
+      - main # Ou o nome do seu branch principal, Ex: master, main
+
+# Permissões necessárias para a ação de deploy no GitHub Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  deploy:
+    name: Construir e Deployar Site
+
+    # Executa o job em um agente Ubuntu recente fornecido pelo GitHub
+    runs-on: ubuntu-latest
+
+    steps:
+      # Passo 1: Fazer checkout do código do repositório
+      - name: Fazer Checkout do Código
+        uses: actions/checkout@v4
+        # Com fetch-depth: 0, o histórico completo do Git é baixado,
+        # o que é necessário para plugins do MkDocs que usam metadados do Git.
+        with:
+          fetch-depth: 0
+
+      # Passo 2: Configurar o ambiente Python
+      # Necessário para instalar e rodar o MkDocs.
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: 3.x # Use a versão mais recente do Python 3
+
+      # Passo 3: Instalar as dependências do MkDocs
+      # Instala o MkDocs e o tema que definimos no mkdocs.yml.
+      - name: Instalar MkDocs e Tema
+        run: |
+          pip install mkdocs==1.5.3 # Fixa a versão para estabilidade (opcional)
+          pip install mkdocs-material==9.5.20 # Fixa a versão do tema (opcional)
+          # Se usar outros plugins no mkdocs.yml, instale-os aqui também:
+          # pip install mkdocs-include-markdown-plugin
+
+      # Passo 4: Construir o Site MkDocs
+      # Roda o comando mkdocs build, que lê o mkdocs.yml e os arquivos em /docs.
+      # O site gerado vai para a pasta padrão 'site/'.
+      - name: Construir Site
+        run: mkdocs build
+
+      # Passo 5: Configurar o GitHub Pages
+      # Informa ao GitHub Actions onde encontrar os artefatos para deploy.
+      - name: Configurar GitHub Pages
+        uses: actions/configure-pages@v4
+
+      # Passo 6: Fazer Deploy para GitHub Pages
+      # Usa uma ação dedicada para publicar o conteúdo da pasta 'site/'
+      # no branch 'gh-pages' (ou outra configuração).
+      - name: Fazer Deploy para GitHub Pages
+        uses: actions/upload-pages-artifact@v3
+        with:
+          # Uploads the site folder
+          path: './site' # MkDocs constrói o site na pasta 'site' por padrão
+
+      # O passo final de deploy para GH Pages é feito automaticamente
+      # após o upload do artefato, graças à ação 'configure-pages'.
