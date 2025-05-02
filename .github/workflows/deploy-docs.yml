@@ -62,9 +62,16 @@ jobs:
           python -m venv .venv
           source .venv/bin/activate # Ativa o ambiente virtual
 
-      # Passo 4: Instalar as dependências do MkDocs e Plugins no Ambiente Virtual
-      # Instala as dependências listadas no requirements.txt (que não inclui mkdocs-static-files agora).
-      # O comando 'pip install' agora rodará dentro do ambiente virtual ativo.
+      # Passo 4: Limpar Cache do Pip (NOVO PASSO)
+      # Limpa o cache do pip para garantir que ele busque as versões mais recentes.
+      - name: Limpar Cache do Pip
+        run: |
+          source .venv/bin/activate # Garante que o ambiente virtual está ativo
+          pip cache purge
+
+      # Passo 5: Instalar as dependências do MkDocs e Plugins no Ambiente Virtual
+      # Instala as dependências listadas no requirements.txt (que agora inclui mkdocs-static-files==0.6.0).
+      # O comando 'pip install' rodará dentro do ambiente virtual ativo.
       - name: Instalar MkDocs e Tema e Plugins
         run: |
           source .venv/bin/activate # Garante que o ambiente virtual está ativo para este passo
@@ -74,20 +81,20 @@ jobs:
           # Se você resolver o problema com o plugin 'scm' no futuro, pode precisar instalá-lo explicitamente aqui
           # ou verificar se ele é incluído automaticamente com a versão do MkDocs.
 
-      # Passo 5: Construir o Site MkDocs (dentro do Ambiente Virtual)
+      # Passo 6: Construir o Site MkDocs (dentro do Ambiente Virtual)
       # Executa o comando que lê o mkdocs.yml e os arquivos em /docs, gerando o site estático na pasta padrão 'site/'.
-      # O comando 'mkdocs build' agora usará a instalação do MkDocs dentro do ambiente virtual.
+      # O comando 'mkdocs build' usará a instalação do MkDocs dentro do ambiente virtual.
       - name: Construir Site
         run: |
           source .venv/bin/activate # Garante que o ambiente virtual está ativo para este passo
           mkdocs build
 
-      # Passo 6: Configurar o GitHub Pages (usando a v5)
+      # Passo 7: Configurar o GitHub Pages (usando a v5)
       # Este passo prepara o ambiente para o deploy no Pages.
       - name: Configurar GitHub Pages
         uses: actions/configure-pages@v5 # Usando a versão v5.
 
-      # Passo 7: Fazer Upload do Artefato do Site (APONTANDO PARA A PASTA CORRETA)
+      # Passo 8: Fazer Upload do Artefato do Site (APONTANDO PARA A PASTA CORRETA)
       # Usa a ação oficial para fazer upload da pasta 'site/' como um artefato nomeado 'github-pages'.
       # É CRUCIAL que 'path' aponte para a pasta onde o MkDocs construiu o site.
       - name: Upload artifact
@@ -100,10 +107,9 @@ jobs:
           # Define por quantos dias o artefato será retido (opcional).
           retention-days: 1
 
-      # Passo 8: Fazer Deploy para GitHub Pages (Passo Final de Publicação)
+      # Passo 9: Fazer Deploy para GitHub Pages (Passo Final de Publicação)
       # Usa a ação oficial para acionar a publicação do artefato 'github-pages' no serviço de Pages.
       # Este passo é necessário quando a Source nas Pages Settings é 'GitHub Actions'.
       - name: Deploy to GitHub Pages
         id: deployment # Atribui um ID para referenciar outputs (como a URL do site)
         uses: actions/deploy-pages@v4 # Usa a ação de deploy final.
-
