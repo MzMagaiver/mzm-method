@@ -81,12 +81,9 @@ plugins:
   # Plugin para incluir conteúdo de outros arquivos Markdown
   - include-markdown
 
-  # Plugin para copiar arquivos estáticos de fora da pasta docs/
-  - static-files: # <<< NOVO PLUGIN AQUI
-      # Lista de arquivos/pastas a serem copiados, caminhos relativos à raiz do repositório
-      - 'grammar/' # Copia a pasta 'grammar' inteira para 'site/grammar/'
-      # Se houver outros arquivos/pastas fora de docs/ que você quer linkar diretamente, adicione-os aqui.
-      # Exemplo: - 'caminho/para/seu/arquivo.ext'
+  # O plugin 'static-files' foi removido pois a pasta 'grammar' será movida para dentro de 'docs'.
+  # - static-files: # <<< PLUGIN STATIC FILES REMOVIDO AQUI
+  #     - 'grammar/'
 
 # --- Extensões de Markdown (Opcional) ---
 
@@ -100,10 +97,11 @@ markdown_extensions:
   - pymdownx.snippets: # Incluir snippets de código de arquivos externos
       base_path: # Lista de caminhos base para procurar snippets (usado pelo {{ include }})
         - "."
-        - "../grammar"
+        # O caminho para 'grammar' foi ajustado pois agora está dentro de 'docs'.
+        - "grammar" # <<< CAMINHO AJUSTADO AQUI
         - "../tools"
         - "../common_rules_repo/rules"
-        - "../examples"
+        - "examples" # O caminho para 'examples' também foi ajustado
 
 # --- Configurações de Deploy (Usado pelo GitHub Actions) ---
 # remote_branch: gh-pages # Não necessário com actions/deploy-pages
