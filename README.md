@@ -37,7 +37,7 @@ Estamos buscando colaboradores apaixonados para construir este futuro. Ajude a m
 
 **Como Colaborar:**
 
-* Leia o [Manual do Arquiteto Zen](https://MzMagaiver.github.io/mzm-method/manual/).
+* Leia o [Manual do Arquiteto Zen](https://MzMagaiver.github.io/mzm-method/manual/introducao/).
 * Explore nossos [Exemplos](https://MzMagaiver.github.io/mzm-method/examples/). 
 * Visite nosso [Site Completo](https://MzMagaiver.github.io/mzm-method/).
 * Explore o Código no [Repositório GitHub](https://github.com/MzMagaiver/mzm-method/).
