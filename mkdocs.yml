@@ -8,19 +8,20 @@
 # O nome do seu projeto. Aparecerá no título do site.
 site_name: Método MZ-M: Modelagem Zen de Sistemas
 
-# A URL base onde o site será hospedado (Placeholder - ajustar no GitHub Pages)
+# A URL base onde o site será hospedado (Ajuste conforme sua URL real do GitHub Pages)
 # Exemplo: https://seunome.github.io/nome-do-repo/
-# A URL completa DEVE estar entre aspas simples ou duplas para evitar erros de parsing YAML.
-site_url: 'https://MzMagaiver.github.io/mzm-method/' # <<< LINHA CORRIGIDA - URL do SEU site GitHub Pages
+# A URL completa DEVE estar entre aspas simples ou duplas.
+site_url: 'https://MzMagaiver.github.io/mzm-method/' # <<< CORRIGIDO com aspas
 
 # URL do repositório GitHub. Usado para links como "Edit on GitHub" ou ícones.
-repo_url: https://github.com/MzMagaiver/mzm-method/ # <<< AJUSTADO para SEU repositório
+# A URL completa DEVE estar entre aspas simples ou duplas.
+repo_url: 'https://github.com/MzMagaiver/mzm-method/' # <<< CORRIGIDO com aspas
 
 # Nome do repositório (opcional, mas útil para o tema)
-repo_name: MzMagaiver/mzm-method # <<< AJUSTADO para SEU repositório
+repo_name: MzMagaiver/mzm-method
 
 # Copyright (opcional)
-copyright: 'Copyright &copy; 2023 - 2025 MzMagaiver' # <<< AJUSTADO para SEU nome/repo
+copyright: 'Copyright &copy; 2023 - 2025 MzMagaiver'
 
 # --- Configurações do Tema ---
 
@@ -70,10 +71,11 @@ nav:
   # Playground Online (Link Externo ou Interno futuro)
   # Quando o playground estiver pronto, este item levará a ele.
   # Por enquanto, pode ser um link para a seção no Manual ou uma página 'Em Breve'.
-  - Playground Online: https://<link-para-seu-playground-quando-pronto> # Placeholder! AJUSTAR QUANDO TIVER O LINK DO PLAYGROUND
+  - Playground Online: 'https://<link-para-seu-playground-quando-pronto>' # <<< CORRIGIDO com aspas
 
   # Repositório GitHub (Link direto)
-  - Repositório GitHub: https://github.com/MzMagaiver/mzm-method/ # <<< AJUSTADO para SEU repositório
+  # A URL completa DEVE estar entre aspas simples ou duplas.
+  - Repositório GitHub: 'https://github.com/MzMagaiver/mzm-method/' # <<< CORRIGIDO com aspas
 
 # --- Configurações de Plugins (Opcional, Mas Útil) ---
 
@@ -84,6 +86,8 @@ plugins:
   # Por enquanto, podemos incluir os arquivos .mzm como blocos de código simples no Markdown.
   # Se necessário, pode-se usar 'pymdownx.highlight' no markdown_extensions abaixo e configurar no tema.
   - include-markdown # Permite incluir outros arquivos markdown. (pip install mkdocs-include-markdown-plugin)
+  - mkdocs.plugins.scm: {} # Inclui informações de SCM (commit, etc.)
+
 
 # --- Extensões de Markdown (Opcional) ---
 
@@ -95,17 +99,16 @@ markdown_extensions:
   - pymdownx.superfences # Blocos de código aninhados
   - pymdownx.details # Blocos de detalhes retráteis
   - pymdownx.snippets: # Incluir snippets de código de arquivos externos
-      base_path: [ '.', '../grammar', '../tools', '../common_rules_repo/rules', '../examples'] # Define onde procurar snippets
-  # ... outras extensões úteis ...
+      base_path: # <<< SINTAXE CORRIGIDA aqui. 'base_path' é uma chave.
+        - '.' # Estes são os itens da lista de 'base_path'.
+        - '../grammar'
+        - '../tools'
+        - '../common_rules_repo/rules'
+        - '../examples'
 
 # --- Configurações de Deploy (Usado pelo GitHub Actions) ---
-
-# Configuração para deploy via gh-pages
-plugins:
-  - mkdocs.plugins.scm: {} # Inclui informações de SCM (commit, etc.)
-
-# Configurações de deploy (MkDocs padrão para gh-deploy ou usado por ações customizadas)
-# remote_branch: gh-pages # O branch onde o site será publicado
-# site_dir: site # O diretório onde o site é construído
+# remote_branch: gh-pages
+# site_dir: site
 
 # Nota: As configurações de deploy específicas podem depender da ação de GitHub Actions utilizada.
+# A ação 'peaceiris/actions-gh-pages@v4' geralmente gerencia estes detalhes para você.
