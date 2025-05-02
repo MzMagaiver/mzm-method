@@ -6,37 +6,34 @@
 # --- Configurações Básicas do Site ---
 
 # O nome do seu projeto. Aparecerá no título do site.
-site_name: "Método MZ-M: Modelagem Zen de Sistemas" # Corrigido com aspas
+site_name: "Método MZ-M: Modelagem Zen de Sistemas"
 
 # A URL base onde o site será hospedado (Ajuste conforme sua URL real do GitHub Pages)
 # Exemplo: https://seunome.github.io/nome-do-repo/
-# A URL completa DEVE estar entre aspas simples ou duplas.
-site_url: "https://MzMagaiver.github.io/mzm-method/" # Corrigido com aspas
+site_url: "https://MzMagaiver.github.io/mzm-method/"
 
 # URL do repositório GitHub. Usado para links como "Edit on GitHub" ou ícones.
-# A URL completa DEVE estar entre aspas simples ou duplas.
-repo_url: "https://github.com/MzMagaiver/mzm-method/" # Corrigido com aspas
+repo_url: "https://github.com/MzMagaiver/mzm-method/"
 
 # Nome do repositório (opcional, mas útil para o tema)
-repo_name: "MzMagaiver/mzm-method" # Corrigido com aspas
+repo_name: "MzMagaiver/mzm-method"
 
 # Copyright (opcional)
-copyright: "Copyright © 2023 - 2025 MzMagaiver" # Corrigido com aspas
+copyright: "Copyright © 2023 - 2025 MzMagaiver"
 
 # --- Configurações do Tema ---
 
 # Usaremos o tema Material para MkDocs, que é popular e visualmente atraente.
 theme:
-  name: "material" # Corrigido com aspas
+  name: "material"
 
   # Cores do tema (opcional, personalize!)
   palette:
-    primary: "Deep Purple" # Cor principal - Corrigido com aspas
-    accent: "Light Blue"   # Cor de destaque - Corrigido com aspas
+    primary: "Deep Purple" # Cor principal
+    accent: "Light Blue"   # Cor de destaque
 
-  # Ícones (opcional, requer configuração no tema Material)
-  # icons:
-  #   repo: fontawesome/brands/github
+  # Logo (opcional) - Adicione o caminho para o seu arquivo de logo aqui
+  # logo: assets/images/nome-do-seu-logo.png # Exemplo: docs/assets/images/logo-mzm.png
 
   # Recursos (opcional, habilita funcionalidades do tema)
   features:
@@ -49,67 +46,61 @@ theme:
 # Define a estrutura de navegação do site, mapeando nomes para arquivos Markdown.
 # Os caminhos dos arquivos (.md, .mzm) são relativos à pasta 'docs/'.
 nav:
-  - Home: "index.md" # Corrigido com aspas
+  - Home: "index.md"
 
   # Manual do Arquiteto Zen - Organizado em seções
-  - "Manual do Arquiteto Zen": # Corrigido com aspas
-    - "Introdução": "manual/introducao.md" # Corrigido com aspas
-    - "A Gramática MZ-M": "manual/gramatica.md" # Corrigido com aspas
-    - "Ferramentas Essenciais": "manual/ferramentas.md" # Corrigido com aspas
-    - "Runtime e Rastreabilidade": "manual/runtime.md" # Corrigido com aspas
-    - "A Visão Completa": "manual/visao-completa.md" # Corrigido com aspas
+  - "Manual do Arquiteto Zen":
+    - "Introdução": "manual/introducao.md"
+    - "A Gramática MZ-M": "manual/gramatica.md"
+    - "Ferramentas Essenciais": "manual/ferramentas.md"
+    - "Runtime e Rastreabilidade": "manual/runtime.md"
+    - "A Visão Completa": "manual/visao-completa.md"
 
   # Exemplos de Modelos MZ-M
-  - "Exemplos": # Corrigido com aspas
-    # Criaremos um arquivo index.md na pasta examples/ para listar os exemplos
-    - "Introdução aos Exemplos": "examples/index.md" # Corrigido com aspas
+  - "Exemplos": # Este é o item principal na navegação
+    # O link para a introdução dos exemplos (o arquivo que criamos agora)
+    - "Introdução aos Exemplos": "examples/index.md" # <<< Caminho para o novo arquivo
     # Links diretos para os arquivos .mzm (serão exibidos como código no site)
-    - "Exemplo 1: Invariantes": "examples/usuario_invariants.mzm" # Corrigido com aspas
-    - "Exemplo 2: Intenção/Contrato": "examples/usuario_login.mzm" # Corrigido com aspas
-    - "Exemplo 3: Causalidade": "examples/usuario_causalidade.mzm" # Corrigido com aspas
+    - "Exemplo 1: Invariantes": "examples/usuario_invariants.mzm"
+    - "Exemplo 2: Intenção/Contrato": "examples/usuario_login.mzm"
+    - "Exemplo 3: Causalidade": "examples/usuario_causalidade.mzm"
 
   # Playground Online (Link Externo ou Interno futuro)
-  # Quando o playground estiver pronto, este item levará a ele.
-  # Por enquanto, pode ser um link para a seção no Manual ou uma página 'Em Breve'.
-  - "Playground Online": "https://<link-para-seu-playground-quando-pronto>" # Corrigido com aspas e placeholder!
+  - "Playground Online": "https://<link-para-seu-playground-quando-pronto>" # Lembre-se de ajustar este link!
 
   # Repositório GitHub (Link direto)
-  # A URL completa DEVE estar entre aspas simples ou duplas.
-  - "Repositório GitHub": "https://github.com/MzMagaiver/mzm-method/" # Corrigido com aspas
+  - "Repositório GitHub": "https://github.com/MzMagaiver/mzm-method/"
 
 # --- Configurações de Plugins (Opcional, Mas Útil) ---
 
 # Habilita plugins para funcionalidades extras.
 plugins:
-  # Adicionar plugin para renderizar código CUE com sintaxe highlighting correta (precisa encontrar/criar um)
-  # ou usar um plugin que permite incluir arquivos no markdown.
-  # Por enquanto, podemos incluir os arquivos .mzm como blocos de código simples no Markdown.
-  # Se necessário, pode-se usar 'pymdownx.highlight' no markdown_extensions abaixo e configurar no tema.
-  - include-markdown # Permite incluir outros arquivos markdown. (pip install mkdocs-include-markdown-plugin)
-  # O plugin 'scm' foi removido temporariamente para resolver um erro de build.
+  # O plugin 'scm' foi removido temporariamente do mkdocs.yml por causa de um erro de build anterior.
   # - scm: {} # <<< ESTA LINHA FOI REMOVIDA TEMPORARIAMENTE
+
+  # Plugin para incluir conteúdo de outros arquivos Markdown
+  - include-markdown
 
 # --- Extensões de Markdown (Opcional) ---
 
 # Habilita extensões para funcionalidades extras no Markdown (tabelas, notas de rodapé, etc.)
 markdown_extensions:
   - admonition # Blocos de "Nota", "Aviso", etc.
-  - pymdownx.highlight: # Sintaxe highlighting - Configuração CORRIGIDA aqui
-      linenums: true # <<< Opção correta para numeração de linhas
-      # anchor_ln: true # <<< Opção REMOVIDA pois não existe nesta extensão
+  - pymdownx.highlight: # Sintaxe highlighting
+      linenums: true # Numeração de linhas nos blocos de código
   - pymdownx.superfences # Blocos de código aninhados
   - pymdownx.details # Blocos de detalhes retráteis
   - pymdownx.snippets: # Incluir snippets de código de arquivos externos
-      base_path: # <<< SINTAXE CORRIGIDA aqui. 'base_path' é uma chave.
-        - "." # Estes são os itens da lista de 'base_path'. Corrigido com aspas.
-        - "../grammar" # Corrigido com aspas.
-        - "../tools" # Corrigido com aspas.
-        - "../common_rules_repo/rules" # Corrigido com aspas.
-        - "../examples" # Corrigido com aspas.
+      base_path: # Lista de caminhos base para procurar snippets
+        - "."
+        - "../grammar"
+        - "../tools"
+        - "../common_rules_repo/rules"
+        - "../examples"
 
 # --- Configurações de Deploy (Usado pelo GitHub Actions) ---
-# remote_branch: gh-pages
-# site_dir: site
+# remote_branch: gh-pages # Não necessário com actions/deploy-pages
+# site_dir: site # Não necessário com actions/upload-pages-artifact
 
-# Nota: As configurações de deploy específicas podem depender da ação de GitHub Actions utilizada.
-# A ação 'peaceiris/actions-gh-pages@v4' geralmente gerencia estes detalhes para você.
+# Nota: As configurações de deploy específicas são gerenciadas pelo workflow de GitHub Actions
+# e pela configuração de Pages no repositório (Source: GitHub Actions, Build: Static HTML).
