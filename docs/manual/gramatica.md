@@ -1,44 +1,68 @@
-A Gramática MZ-M
-A Gramática MZ-M, baseada em CUE, é a linguagem formal para descrever a lógica de negócio. Seu objetivo é expressar a intenção e o contrato dos sistemas com clareza e de forma verificável, separando a lógica da implementação técnica.
+📘 Gramática MZ-M
+A Gramática MZ-M, baseada em CUE, é a linguagem formal para descrever a lógica de negócio dos sistemas. Seu objetivo é expressar a intenção e o contrato dos sistemas com clareza e de forma verificável, separando a lógica da implementação técnica.
 
-Estrutura
-Modelos MZ-M (.mzm) usam sintaxe CUE e incluem seções como:
+📚 Estrutura
+Modelos MZ-M (.mzm) utilizam sintaxe do CUE e são organizados em seções principais:
 
-entities: Define entidades e seus invariantes.
+entities: Define entidades e seus invariantes (regras sempre verdadeiras).
 
-intents: Descreve operações do sistema.
+intents: Descreve operações ou intenções do sistema.
 
-contracts: Especifica pré/pós-condições para intenções.
+contracts: Especifica pré-condições e pós-condições das intenções.
 
-rules: Define lógica reutilizável.
+rules: Define lógica reutilizável para manter consistência.
 
-events: Modela resultados de intenções.
+events: Modela os resultados das intenções.
 
-causality: Mapeia relações entre intenções e eventos.
+causality: Mapeia relações causais entre intenções e eventos.
 
-Schema da Gramática
-Um schema CUE define formalmente a gramática, permitindo validação de arquivos .mzm.
+🧩 Schema da Gramática
+Um arquivo schema CUE formaliza a gramática da linguagem MZ-M, permitindo a validação dos arquivos .mzm com precisão.
 
-Baixar o Schema da Gramática MZ-M
+📥 Baixar Schema da Gramática MZ-M
 
-Nota: Link relativo navega um nível acima (../) para a pasta grammar/.
+Nota: o link acima é relativo e navega um nível acima para acessar a pasta grammar/.
 
-Conceitos Chave
-Entidades e Invariantes: Modele conceitos de negócio com condições que devem ser sempre verdadeiras. Exemplo:
+🔑 Conceitos Chave
+✅ Entidades e Invariantes
+Modele conceitos de negócio com condições que devem ser sempre verdadeiras.
 
+📄 Exemplo:
+
+cue
+Copiar
+Editar
 {{ include "examples/usuario_invariants.mzm" }}
+🧠 Intenções e Contratos
+Descreva operações do sistema, suas condições de entrada (pré) e resultados esperados (pós).
 
-Intenções e Contratos: Descreva operações e suas condições (pré/pós). Exemplo:
+📄 Exemplo:
 
+cue
+Copiar
+Editar
 {{ include "examples/usuario_login.mzm" }}
+♻️ Regras Reutilizáveis
+Encapsule lógica comum em rules para garantir consistência entre diferentes partes do modelo.
 
-Regras Reutilizáveis: Encapsule lógica comum para consistência.
+🔗 Causalidade e Eventos
+Descreva os resultados gerados por intenções para rastreabilidade semântica do sistema.
 
-Causalidade e Eventos: Descreva resultados de intenções para rastreabilidade semântica. Exemplo:
+📄 Exemplo:
 
+cue
+Copiar
+Editar
 {{ include "examples/usuario_causalidade.mzm" }}
+🧭 Próximos Passos
+Explore mais:
 
-Próximos Passos
-Explore mais sobre Ferramentas Essenciais, Runtime e Rastreabilidade e a A Visão Completa no manual.
+Ferramentas Essenciais
 
-Entender a gramática é crucial para
+Runtime
+
+Rastreabilidade
+
+A Visão Completa
+
+Entender a gramática é crucial para garantir consistência, rastreabilidade e clareza na modelagem dos sistemas baseados em MZ-M.
