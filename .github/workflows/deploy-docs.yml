@@ -43,7 +43,7 @@ jobs:
       # Passo 3: Instalar as dependências do MkDocs
       # Instala o MkDocs, o tema e todos os plugins em um único comando para melhor resolução de dependências.
       - name: Instalar MkDocs e Tema e Plugins
-        run: pip install mkdocs mkdocs-material==9.5.20 mkdocs-include-markdown-plugin # <<< INSTALAÇÃO UNIFICADA AQUI
+        run: pip install mkdocs mkdocs-material==9.5.20 mkdocs-include-markdown-plugin
           # O plugin mkdocs.plugins.scm (referenciado como 'scm' no mkdocs.yml)
           # é geralmente incluído com o MkDocs e não precisa ser instalado separadamente.
           # Se você adicionar outros plugins no futuro, adicione-os na linha acima.
@@ -54,19 +54,22 @@ jobs:
       - name: Construir Site
         run: mkdocs build
 
-      # Passo 5: Configurar o GitHub Pages
-      # Informa ao GitHub Actions onde encontrar os artefatos para deploy.
-      - name: Configurar GitHub Pages
-        uses: actions/configure-pages@v4
+      # REMOVIDO: O passo 'Configurar GitHub Pages' foi removido para evitar conflitos
+      # com a configuração manual no repositório e simplificar o deploy.
 
-      # Passo 6: Fazer Deploy para GitHub Pages
-      # Usa uma ação dedicada para publicar o conteúdo da pasta 'site/'
-      # no branch 'gh-pages' (ou outra configuração).
+      # Passo 5: Fazer Deploy para GitHub Pages
+      # Usa a ação dedicada para publicar o conteúdo da pasta 'site/'
+      # O GitHub Pages, configurado no repositório, usará o artefato deste upload.
       - name: Fazer Deploy para GitHub Pages
         uses: actions/upload-pages-artifact@v3
         with:
           # Uploads the site folder
-          path: './site' # MkDocs constrói o site na pasta 'site' por padrão
+          path: './site'
+          # O nome do artefato é 'github-pages' por padrão na v3 e é o esperado pelo Pages
+          name: github-pages # Mantido explicitamente para clareza
+          retention-days: 1 # Define por quanto tempo o artefato será mantido (opcional)
 
-      # O passo final de deploy para GH Pages é feito automaticamente
-      # após o upload do artefato, graças à ação 'configure-pages'.
+
+      # O passo final de deploy para GH Pages é feito automaticamente PELO GitHub Pages
+      # após o upload do artefato 'github-pages', APENAS se a configuração no repositório
+      # estiver definida para usar GitHub Actions como fonte.
