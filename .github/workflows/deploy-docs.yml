@@ -2,7 +2,7 @@
 #
 # Workflow de GitHub Actions para construir e deployar o site MkDocs para GitHub Pages.
 # Aciona automaticamente em pushes para o branch principal.
-# Este workflow combina a construção do MkDocs com o fluxo de deploy de Static HTML via Pages Actions.
+# Este workflow gera HTML estático usando MkDocs e o deploya via GitHub Pages Actions.
 # LOCAL: .github/workflows/
 
 name: Deploy Docs via MkDocs
@@ -54,12 +54,12 @@ jobs:
         with:
           python-version: 3.x # Usa a versão mais recente do Python 3
 
-      # Passo 3: Instalar as dependências do MkDocs
-      # Instala o MkDocs, o tema Material e outros plugins necessários (em um comando para resolver dependências).
-      # Certifique-se de que todos os plugins listados no seu mkdocs.yml (exceto o 'scm' temporariamente removido)
-      # estejam incluídos nesta linha 'pip install'.
+      # Passo 3: Instalar as dependências do MkDocs e Plugins
+      # Instala o MkDocs, o tema Material e todos os plugins necessários.
+      # Adicionamos 'mkdocs-static-files' aqui para garantir que ele seja instalado.
       - name: Instalar MkDocs e Tema e Plugins
-        run: pip install mkdocs mkdocs-material==9.5.20 mkdocs-include-markdown-plugin
+        run: |
+          pip install mkdocs mkdocs-material==9.5.20 mkdocs-include-markdown-plugin mkdocs-static-files # <<< PLUGIN STATIC FILES ADICIONADO AQUI
           # O plugin mkdocs.plugins.scm (referenciado como 'scm' no mkdocs.yml)
           # é geralmente incluído com o MkDocs, mas causou um erro anterior.
           # Se você resolver o problema com o plugin 'scm' no futuro, pode precisar instalá-lo explicitamente aqui
@@ -73,7 +73,7 @@ jobs:
       # Passo 5: Configurar o GitHub Pages (usando a v5)
       # Este passo prepara o ambiente para o deploy no Pages.
       - name: Configurar GitHub Pages
-        uses: actions/configure-pages@v5 # Usando a versão v5, como no workflow padrão que você compartilhou.
+        uses: actions/configure-pages@v5 # Usando a versão v5.
 
       # Passo 6: Fazer Upload do Artefato do Site (APONTANDO PARA A PASTA CORRETA)
       # Usa a ação oficial para fazer upload da pasta 'site/' como um artefato nomeado 'github-pages'.
@@ -82,7 +82,7 @@ jobs:
         uses: actions/upload-pages-artifact@v3
         with:
           # Define a pasta a ser carregada - DEVE ser a pasta de saída do MkDocs.
-          path: './site' # <<< CORRIGIDO para apontar para a pasta construída pelo MkDocs
+          path: './site' # Aponta para a pasta construída pelo MkDocs
           # Define o nome do artefato. 'github-pages' é o nome padrão esperado pelo Pages.
           name: github-pages
           # Define por quantos dias o artefato será retido (opcional).
@@ -94,4 +94,3 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment # Atribui um ID para referenciar outputs (como a URL do site)
         uses: actions/deploy-pages@v4 # Usa a ação de deploy final.
-
