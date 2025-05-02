@@ -57,10 +57,10 @@ jobs:
 
       # Passo 3: Instalar as dependências do MkDocs e Plugins
       # Instala o MkDocs, o tema Material e todos os plugins necessários.
-      # Especificamos a versão 0.6.0 para mkdocs-static-files para garantir compatibilidade com Python 3.12.
+      # Removemos a versão fixa para mkdocs-static-files para que pip encontre uma compatível com Python 3.12.
       - name: Instalar MkDocs e Tema e Plugins
         run: |
-          pip install mkdocs mkdocs-material==9.5.20 mkdocs-include-markdown-plugin mkdocs-static-files==0.6.0 # <<< VERSÃO ESPECÍFICA ADICIONADA AQUI
+          pip install mkdocs mkdocs-material==9.5.20 mkdocs-include-markdown-plugin mkdocs-static-files # <<< VERSÃO ESPECÍFICA REMOVIDA AQUI
           # O plugin mkdocs.plugins.scm (referenciado como 'scm' no mkdocs.yml)
           # é geralmente incluído com o MkDocs, mas causou um erro anterior.
           # Se você resolver o problema com o plugin 'scm' no futuro, pode precisar instalá-lo explicitamente aqui
