@@ -41,27 +41,12 @@ jobs:
           python-version: 3.x # Use a versão mais recente do Python 3
 
       # Passo 3: Instalar as dependências do MkDocs
-      # Instala o MkDocs (versão compatível com mkdocs-material), o tema e outros plugins.
+      # Instala o MkDocs, o tema e todos os plugins em um único comando para melhor resolução de dependências.
       - name: Instalar MkDocs e Tema e Plugins
-        run: |
-          pip install mkdocs
-          pip install mkdocs-material==9.5.20
-          # Instale outros plugins usados no mkdocs.yml aqui:
-          pip install mkdocs-include-markdown-plugin
-
+        run: pip install mkdocs mkdocs-material==9.5.20 mkdocs-include-markdown-plugin # <<< INSTALAÇÃO UNIFICADA AQUI
           # O plugin mkdocs.plugins.scm (referenciado como 'scm' no mkdocs.yml)
           # é geralmente incluído com o MkDocs e não precisa ser instalado separadamente.
-
-          # Se você adicionar outros plugins no futuro, instale-os aqui também.
-
-      # <<< PASSO DE DIAGNÓSTICO >>>
-      # Este passo roda o comando 'mkdocs plugins' para listar os plugins detectados.
-      # O output deste passo nos ajudará a entender por que o plugin 'scm' não está sendo encontrado.
-      - name: Debug MkDocs Plugins
-        run: |
-          mkdocs --version
-          mkdocs plugins
-      # <<< FIM DO PASSO DE DIAGNÓSTICO >>>
+          # Se você adicionar outros plugins no futuro, adicione-os na linha acima.
 
       # Passo 4: Construir o Site MkDocs
       # Roda o comando mkdocs build, que lê o mkdocs.yml e os arquivos em /docs.
