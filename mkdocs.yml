@@ -1,0 +1,107 @@
+# Arquivo: mkdocs.yml
+# Configuração base para o site de documentação e divulgação do Método MZ-M.
+
+# --- Configurações Básicas do Site ---
+
+# O nome do seu projeto. Aparecerá no título do site.
+site_name: Método MZ-M: Modelagem Zen de Sistemas
+
+# A URL base onde o site será hospedado (Placeholder - ajustar no GitHub Pages)
+# Exemplo: https://seuusuario.github.io/mzm-method/
+site_url: https://<seu-usuario>.github.io/mzm-method/
+
+# URL do repositório GitHub. Usado para links como "Edit on GitHub" ou ícones.
+repo_url: https://github.com/<seu-usuario>/mzm-method/
+
+# Nome do repositório (opcional, mas útil para o tema)
+repo_name: <seu-usuario>/mzm-method
+
+# Copyright (opcional)
+copyright: 'Copyright &copy; 2023 - 2025 <Seu Nome/Nome da Organização>'
+
+# --- Configurações do Tema ---
+
+# Usaremos o tema Material para MkDocs, que é popular e visualmente atraente.
+theme:
+  name: material # Instale com 'pip install mkdocs-material'
+
+  # Cores do tema (opcional, personalize!)
+  palette:
+    primary: 'Deep Purple' # Cor principal
+    accent: 'Light Blue'   # Cor de destaque
+
+  # Ícones (opcional, requer configuração no tema Material)
+  # icons:
+  #   repo: fontawesome/brands/github
+
+  # Recursos (opcional, habilita funcionalidades do tema)
+  features:
+    - navigation.tabs # Navegação principal como abas no topo
+    - navigation.instant # Carregamento instantâneo de páginas
+    # - toc.integrate # Integrar ToC na navegação lateral
+
+# --- Configurações de Navegação (O Coração do Site) ---
+
+# Define a estrutura de navegação do site, mapeando nomes para arquivos Markdown.
+nav:
+  - Home: index.md # A página principal (nosso pitch matador)
+
+  # Manual do Arquiteto Zen - Organizado em seções
+  - Manual do Arquiteto Zen:
+    - Introdução: manual/introducao.md
+    - A Gramática MZ-M: manual/gramatica.md
+    - Ferramentas Essenciais: manual/ferramentas.md
+    - Runtime e Rastreabilidade: manual/runtime.md
+    - A Visão Completa: manual/visao-completa.md
+
+  # Exemplos de Modelos MZ-M
+  - Exemplos:
+    # Criaremos um arquivo index.md na pasta examples/ para listar os exemplos
+    - Introdução aos Exemplos: examples/index.md # Precisamos criar este arquivo
+    # Links diretos para os arquivos .mzm (serão exibidos como código no site)
+    - Exemplo 1: Invariantes: examples/usuario_invariants.mzm
+    - Exemplo 2: Intenção/Contrato: examples/usuario_login.mzm
+    - Exemplo 3: Causalidade: examples/usuario_causalidade.mzm
+
+  # Playground Online (Link Externo ou Interno futuro)
+  # Quando o playground estiver pronto, este item levará a ele.
+  # Por enquanto, pode ser um link para a seção no Manual ou uma página 'Em Breve'.
+  - Playground Online: https://<link-para-seu-playground-quando-pronto> # Placeholder!
+
+  # Repositório GitHub (Link direto)
+  - Repositório GitHub: https://github.com/<seu-usuario>/mzm-method/ # Link direto para o código
+
+# --- Configurações de Plugins (Opcional, Mas Útil) ---
+
+# Habilita plugins para funcionalidades extras.
+plugins:
+  # Adicionar plugin para renderizar código CUE com sintaxe highlighting correta (precisa encontrar/criar um)
+  # ou usar um plugin que permite incluir arquivos no markdown.
+  # Por enquanto, podemos incluir os arquivos .mzm como blocos de código simples no Markdown.
+  # Se necessário, pode-se usar 'pymdownx.highlight' no markdown_extensions abaixo e configurar no tema.
+  - include-markdown # Permite incluir outros arquivos markdown. (pip install mkdocs-include-markdown-plugin)
+
+# --- Extensões de Markdown (Opcional) ---
+
+# Habilita extensões para funcionalidades extras no Markdown (tabelas, notas de rodapé, etc.)
+markdown_extensions:
+  - admonition # Blocos de "Nota", "Aviso", etc.
+  - pymdownx.highlight: # Sintaxe highlighting
+      anchor_ln: true
+  - pymdownx.superfences # Blocos de código aninhados
+  - pymdownx.details # Blocos de detalhes retráteis
+  - pymdownx.snippets: # Incluir snippets de código de arquivos externos
+      base_path: [ '.', '../grammar', '../tools', '../common_rules_repo/rules', '../examples'] # Define onde procurar snippets
+  # ... outras extensões úteis ...
+
+# --- Configurações de Deploy (Usado pelo GitHub Actions) ---
+
+# Configuração para deploy via gh-pages
+plugins:
+  - mkdocs.plugins.scm: {} # Inclui informações de SCM (commit, etc.)
+
+# Configurações de deploy (MkDocs padrão para gh-deploy ou usado por ações customizadas)
+# remote_branch: gh-pages # O branch onde o site será publicado
+# site_dir: site # O diretório onde o site é construído
+
+# Nota: As configurações de deploy específicas podem depender da ação de GitHub Actions utilizada.
