@@ -1,6 +1,6 @@
 # Método MZ-M: A Mente do Seu Sistema
 
-![GitHub Actions status](https://github.com/MzMagaiver/mzm-method/workflows/Deploy%20Docs%20via%20MkDocs/badge.svg) # <<< AJUSTADO para SEU repositório
+![GitHub Actions status](https://github.com/MzMagaiver/mzm-method/workflows/Deploy%20Docs%20via%20MkDocs/badge.svg)
 
 ## Revolucione a Lógica de Negócio com Solidez e Clareza
 
