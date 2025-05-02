@@ -1,0 +1,54 @@
+// Arquivo: docs/examples/usuario_invariants.mzm
+// Exemplo 1: Definindo as Regras Invariantes para a Entidade Usuario.
+// Demonstra modelagem de Entidade, Regras Invariantes e uso de Regras Comuns.
+
+mzm_version: "1.0"
+domain: "usuario"
+
+// Importa regras comuns do repositório (usando um alias 'common')
+// Em um setup MkDocs/GitHub Pages, você precisaria garantir que o Linter
+// que valida este arquivo (via GitHub Actions) tem acesso ao repo de regras.
+imports: {
+  common: "repo://mzm-common-rules-repo/v1" # Referência conceitual
+}
+
+// --- Seção de Entidades ---
+entities: {
+  Usuario: #Entidade & { // Define a Entidade "Usuario"
+    description: "Representa um usuário do sistema com suas propriedades básicas. Sua validade é definida pelas invariantes."
+
+    // Regras que definem a validade intrínseca de um objeto Usuario.
+    // Um objeto Usuario é considerado válido SOMENTE SE todas estas regras forem verdadeiras.
+    // Os parâmetros referenciam campos dentro do objeto Usuario sendo validado.
+    invariants: [
+      // Regra comum para validar formato de e-mail. Usa parâmetro 'value'.
+      { rule: "common.email_valido", params: { value: "email" } }, // Assume que o objeto Usuario terá um campo 'email'
+
+      // Regra comum para validar comprimento mínimo de string.
+      { rule: "common.string_min_length", params: { value: "senhaHash", min: 8 } }, // Assume campo 'senhaHash'
+
+      // Regra específica do domínio: O status do usuário deve ser um dos valores permitidos.
+      // Esta regra precisaria ser definida localmente ou em outro repositório importado.
+      { rule: "status_usuario_valido", params: { status: "status" } } // Assume campo 'status'
+    ]
+  }
+}
+
+// --- Seção de Regras (apenas regras específicas deste domínio usadas aqui) ---
+rules: {
+  status_usuario_valido: #Regra & {
+    description: "Verifica se o status do usuário é 'ativo', 'inativo' ou 'bloqueado'."
+    params_schema: { status: string } // Espera um parâmetro chamado 'status'
+    requires_context: [] // Não precisa de contexto externo para verificar.
+    implementation_ref: { // Referência para a implementação em código.
+      python: "domain.usuario.rules.is_status_valido"
+      # java: "com.yourdomain.usuario.rules.IsStatusValido.isValid"
+      # javascript: "@yourdomain/usuario/rules/isStatusValido"
+    }
+  }
+}
+
+// Seções vazias ou não usadas explicitamente neste arquivo de exemplo para foco.
+context: {}
+intentions: {}
+causal_geometry: {}
