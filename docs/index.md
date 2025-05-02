@@ -1,99 +1,34 @@
-Método MZ-M: A Mente do Seu Sistema
-Revolucione a Lógica de Negócio com Solidez e Clareza
-O Problema
-Você enfrenta sistemas onde:
+# Método MZ-M: Modelagem Zen de Sistemas
 
-A lógica de negócio é um emaranhado complexo, difícil de entender, verificar e manter?
-Bugs na lógica são constantes?
-O onboarding de novos membros é um desafio?
+Bem-vindo à documentação oficial do Método MZ-M (Modelagem Zen de Sistemas).
 
-O Método MZ-M (Modelagem Zen de Sistemas) propõe um novo paradigma: em vez de apenas codificar, modelamos a lógica de negócio formalmente — com clareza, solidez e rastreabilidade.
+O Método MZ-M é uma abordagem inovadora para a modelagem de sistemas complexos, focada na clareza, rastreabilidade e na representação precisa da intenção e causalidade dos processos. Utilizando uma gramática simples e poderosa baseada em CUE, o MZ-M permite descrever sistemas de forma declarativa, facilitando a compreensão, a manutenção e a evolução.
 
-✨ O que é o Método MZ-M?
+## O Que Você Encontrará Aqui
 
-Uma abordagem moderna e formal para lógica de negócio, baseada em 5 pilares:
+Esta documentação foi estruturada para guiá-lo desde os conceitos fundamentais do Método MZ-M até exemplos práticos e detalhes técnicos. Explore as seções:
 
-Solidez por Design: A lógica modelada é formalmente verificável. 
+* **Manual do Arquiteto Zen:** Entenda a filosofia por trás do MZ-M, aprenda sobre a gramática, as ferramentas e como o método se encaixa no ciclo de vida de um sistema.
+* **Exemplos:** Veja o MZ-M em ação com exemplos de modelos que ilustram diferentes aspectos da gramática e suas aplicações.
+* **Playground Online:** Experimente a gramática MZ-M diretamente no seu navegador (link será disponibilizado em breve).
+* **Repositório GitHub:** Acesse o código-fonte, contribua e acompanhe o desenvolvimento do Método MZ-M.
 
-Capture bugs antes do deploy, não em produção.
+## Comece Agora
 
-Clareza e Alfabetização Digital: A linguagem .mzm é legível por humanos e auto-documentável.
+Recomendamos que você comece lendo a [Introdução ao Manual do Arquiteto Zen](manual/introducao.md) para ter uma visão geral do Método MZ-M.
 
-Rastreabilidade Semântica: Entenda exatamente por que seu sistema se comportou de uma certa maneira.
+Você também pode [Baixar o Schema da Gramática MZ-M](grammar/mzm_grammar_schema.cue) para referência.
 
-Foco no Desenvolvedor: Ferramentas eliminam boilerplate e aumentam a produtividade.
+## Exemplos Rápidos
 
-Metacognição e Evolução Assistida: Construa sistemas que se analisam e evoluem com auxílio da IA (visão futura).
+Veja abaixo um snippet de um modelo MZ-M que demonstra a declaração de invariantes:
 
+```mzm
+{{ include "examples/usuario_invariants.mzm" }}
 
-🧾 A Linguagem .mzm
+E um exemplo mostrando a intenção e contrato de uma operação:
 
-A Linguagem de Intenção e Contrato permite descrever a lógica de negócio de forma declarativa.
-Exemplo: 
+{{ include "examples/usuario_login.mzm" }}
 
-Definindo um Usuário
-entities:
-  Usuario:
-    description: "Representa um usuário do sistema."
-    invariants:
-      - rule: "common.email_valido"
-        params: { value: "email" }
-      - rule: "common.string_min_length"
-        params: { value: "senhaHash", min: 8 }
-
-
-As regras (common.email_valido, common.string_min_length) vêm do Repositório de Regras Comuns.
-
-🛠️ Toolkit MZ-M
-Ferramentas disponíveis no MVP:
-
-
-✅ Linter de Intenções: Validação da lógica .mzm.
-
-📚 Repositório de Regras Comuns: Reutilização lógica sem esforço.
-
-🔁 Tradutor MZ-M → Código: Gere código em sua linguagem preferida.
-
-🌐Playground Online (em breve).
-
-
-🔗 Acesse o Playground MZ-M OnlineNota: Link será atualizado quando o playground estiver disponível.
-
-🚀 Visão de Futuro
-Nosso roteiro inclui:
-
-
-Integração com qualquer framework.
-Execução com rastreabilidade semântica.
-Evolução lógica assistida por IA.
-Marketplace de componentes reutilizáveis.
-
-
-🤝 Junte-se à Revolução
-Buscamos colaboradores para:
-
-
-Desenvolvimento (Python, Go, JavaScript).
-Criação de exemplos e docs.
-Feedback e testes iniciais.
-
-Benefícios:
-
-
-Projeto open source com alto impacto.
-Aprendizado em modelagem formal.
-Participação em comunidade inovadora.
-
-📌 Próximos Passos
-
-
-🔍 Explore o código no GitHub
-
-📘 Leia o Manual do Arquiteto Zen
-
-💬 Participe das discussõesNota: Link será ajustado para a seção Discussions do repositório.
-
-🎮 Teste o PlaygroundNota: Link será atualizado quando o playground estiver disponível.
-
-
-Transforme seu sistema com uma mente clara e sólida.O futuro da lógica de negócio começa com o MZ-M.
+Contribuição
+O Método MZ-M é um projeto de código aberto e sua contribuição é muito bem-vinda! Se você tiver ideias, sugestões, encontrar um bug ou quiser ajudar a melhorar a documentação,
