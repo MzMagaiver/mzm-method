@@ -1,0 +1,174 @@
+// Arquivo: docs/examples/usuario_login.mzm
+// Exemplo 2: Modelando a Intenção de Login de Usuário.
+// Demonstra Intenções, Contratos (Pré-condições), Referência a Ação Primária, Disparo de Evento.
+
+mzm_version: "1.0"
+domain: "usuario"
+
+imports: {
+  common: "repo://mzm-common-rules-repo/v1" # Regras comuns
+  # Você pode importar definições de outros arquivos .mzm, como as regras gerais do usuário se estiverem separadas.
+  # Ex: usuario_rules: "./usuario_rules.mzm"
+}
+
+// --- Seção de Contexto ---
+// Declara os itens de contexto que esta intenção ou suas regras precisam em runtime.
+context: {
+  // Declara que a Intenção pode precisar de acesso a um "repositório" de usuários para verificar a existência.
+  usuario_repository: #ContextItem & {
+    description: "Serviço ou repositório para acessar dados de usuários existentes."
+    source_ref: "service.database.user_repo" // Como obter este item em runtime (configuração do Motor/Adapters)
+    # schema: { /* Opcional: schema do objeto retornado pelo repositório */ }
+  }
+
+  // Item de contexto para fornecer acesso ao objeto usuário encontrado durante as pré-condições.
+  // Isso ilustra como o Contexto Vivo pode ser enriquecido durante a execução.
+   usuario_encontrado_no_contexto: #ContextItem & {
+       description: "O objeto usuário encontrado e carregado no contexto durante a avaliação das pré-condições, se existir."
+       source_ref: "internal.precondition_lookup.user_object" # Fonte interna, injetada no contexto pelo Adaptador/Middleware
+       # schema: { /* Schema do objeto usuário - útil para validação de consistência */ }
+   }
+}
+
+// --- Seção de Regras ---
+// Define regras específicas para este domínio ou operação que não vêm do repositório comum.
+rules: {
+  // Regra composta simplificada para o exemplo
+  usuario_existe_e_nao_bloqueado: #Regra & {
+      description: "Verifica se um usuário com o email fornecido (do input) existe e não está bloqueado."
+      params_schema: { email: string } # Espera o email como parâmetro
+      requires_context: ["usuario_repository"] # Depende do item de contexto do repositório de usuários
+      implementation_ref: { python: "domain.usuario.rules.user_exists_and_not_blocked" } # Implementação que faz a lookup e checagem de status
+  }
+
+  // Regra: Verificar se a senha fornecida bate com a senha armazenada do usuário ENCONTRADO no contexto.
+  senha_correta_para_usuario_contexto: #Regra & {
+      description: "Verifica se a senha fornecida bate com a senha do usuário encontrado no contexto ('usuario_encontrado_no_contexto')."
+      params_schema: { senhaFornecida: string } # Espera a senha do input como parâmetro.
+      requires_context: ["usuario_encontrado_no_contexto"] # Precisa do item de contexto com o usuário.
+      implementation_ref: { python: "domain.usuario.rules.password_matches_hash_with_context_user" } # Implementação que usa o contexto
+  }
+}
+
+
+// --- Seção de Intenções ---
+// Define as operações verificáveis do sistema.
+intentions: {
+  LoginUsuario: #Intencao & {
+    description: "Permite que um usuário faça login no sistema, verificando credenciais e disparando eventos apropriados."
+
+    # Schema CUE que define a estrutura e os tipos dos dados de entrada para esta Intenção.
+    input_schema: {
+      email: string @tag(format: "email")
+      senha: string # Senha em texto plano no input (a regra checará o hash)
+    }
+
+    # Schema CUE que define a estrutura e os tipos dos dados de saída em caso de sucesso.
+    output_schema: {
+       token: string # Ex: JWT, token de sessão
+       user_id: string # ID do usuário logado
+       # ... outros dados de output úteis, como perfil básico ...
+    }
+
+    # Contratos: Regras que definem as condições que governam a execução da Intenção.
+    contracts: {
+      pre_conditions: [
+        // O que deve ser verdade ANTES que a Ação Primária seja executada.
+        # O Adaptador/Middleware deve garantir que, se a regra 'usuario_existe_e_nao_bloqueado' passar,
+        # o objeto usuário seja carregado no contexto como 'usuario_encontrado_no_contexto'.
+        { rule: "usuario_existe_e_nao_bloqueado", params: { email: "input.email" } }, # Usa o email do input
+        { rule: "senha_correta_para_usuario_contexto", params: { senhaFornecida: "input.senha" } } # Usa a senha do input e o usuário do contexto
+        # Outras pré-condições, Ex: limite de tentativas de login excedido?
+      ]
+      post_conditions: [
+         // O que deve ser verdade DEPOIS que a Ação Primária for executada COM SUCESSO.
+        { rule: "common.string_nao_vazio", params: { value: "output.token" } }, # Garante que um token foi produzido
+        # Outras pós-condições, Ex: O status do usuário logado no sistema de autenticação?
+      ]
+    }
+
+    # Ação Primária: A lógica real que esta Intenção orquestra SE as pré-condições passarem.
+    # Esta referência aponta para o código manual do desenvolvedor.
+    primary_action_ref: "domain.usuario.actions.authenticate_and_generate_token" # Caminho para a função/método de código manual
+
+    # Como esta Intenção se conecta à Geometria Causal ao ser executada.
+    on_success_cause: [
+      // Efeitos causados pelo SUCESSO da Intenção e suas pós-condições.
+      # Dispara um evento significativo "LoginDeUsuarioBemSucedido".
+      {
+          event_trigger: "LoginDeUsuarioBemSucedido",
+          # Passa dados relevantes no payload do evento, referenciando o input ou output da Intenção.
+          payload: {
+            user_id: "output.user_id", # Dados do output da Intenção
+            email: "input.email"       # Dados do input da Intenção
+          }
+      }
+      # Outros efeitos de sucesso, Ex: Mudar estado da Entidade Usuario para 'Logado'?
+      # { state_transition: "Usuario.Estado -> 'Logado'", params: { user_id: "output.user_id" } } # Requer um mecanismo de transição de estado
+    ]
+
+    # O que acontece na geometria causal se as pré-condições falharem.
+    on_failure_cause: [
+       // Efeitos causados pela FALHA da Intenção (pré-condições não satisfeitas).
+       {
+           event_trigger: "LoginDeUsuarioFalhou",
+           payload: {
+               email: "input.email",
+               # O motivo pode vir de um erro retornado pelas regras de pré-condição.
+               # Precisaria de um mecanismo para capturar o motivo da falha da pré-condição.
+               reason: "contract_violation" # Exemplo simplificado
+           }
+       }
+       # Outros efeitos de falha, Ex: Incrementar contador de tentativas falhas?
+       # { effect: "IncrementFailedLoginCounter", params: { email: "input.email" } } # Requer um mecanismo de efeito direto
+    ]
+  }
+  # ... outras intenções ...
+}
+
+# --- Seção de Geometria Causal ---
+# Declara os eventos e estados que este domínio define ou usa.
+causal_geometry: {
+  events: {
+    // Evento disparado pela Intenção LoginUsuario em caso de sucesso.
+    LoginDeUsuarioBemSucedido: #Evento & {
+      description: "Disparado quando um usuário faz login com sucesso."
+      payload_schema: {
+          user_id: string,
+          email: string @tag(format: "email")
+      }
+    }
+     // Evento disparado pela Intenção LoginUsuario em caso de falha nas pré-condições.
+     LoginDeUsuarioFalhou: #Evento & {
+         description: "Disparado quando a Intenção LoginUsuario falha nas pré-condições."
+         payload_schema: {
+             email: string @tag(format: "email"),
+             reason: string # Ex: "contract_violation", "invalid_credentials"
+         }
+     }
+  }
+
+  states: {
+    // Exemplo: Estados relacionados à entidade Usuário.
+    # Estes estados podem ser definidos aqui se forem primariamente usados neste domínio,
+    # ou em um arquivo .mzm dedicado à Entidade Usuario.
+    Usuario: {
+       Logado: #Estado & { description: "O usuário está autenticado na sessão atual." },
+       Deslogado: #Estado & { description: "O usuário não está autenticado." }
+       # Outros estados da entidade Usuário, Ex: "Ativo", "Inativo", "Bloqueado" (relacionado ao exemplo 1)
+    }
+    # Exemplo de estado de sistema
+    # Sistema: {
+    #    Manutencao: #Estado & { description: "O sistema está em modo de manutenção." }
+    # }
+  }
+
+  relations: [
+    # As Relações Causais que reagem a eventos como LoginDeUsuarioBemSucedido
+    # geralmente residem em outros arquivos .mzm que importam este evento.
+    # Este arquivo apenas declara o evento que pode ser disparado.
+  ]
+}
+
+# Seções vazias ou não usadas explicitamente neste arquivo de exemplo para foco.
+# entities: {} # Entidade Usuario definida em usuario_invariants.mzm (ou poderia ser aqui se fosse arquivo unico)
