@@ -6,7 +6,7 @@ site_name: Método MZ-M: Modelagem Zen de Sistemas
 site_url: 'https://MzMagaiver.github.io/mzm-method/'
 repo_url: https://github.com/MzMagaiver/mzm-method/
 repo_name: MzMagaiver/mzm-method
-copyright: 'Copyright © 2023 - 2025 MzMagaiver'
+copyright: Copyright (c) 2023 - 2025 MzMagaiver
 
 # --- Configurações do Tema ---
 theme:
