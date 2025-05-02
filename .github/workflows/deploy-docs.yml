@@ -55,15 +55,15 @@ jobs:
         with:
           python-version: 3.12 # Mantido em 3.12
 
-      # Passo 3: Instalar as dependências do MkDocs e Plugins
-      # Tenta instalar o plugin mkdocs-static-files separadamente primeiro para contornar problemas de instalação.
-      # Usando flags para evitar cache e forçar reinstalação.
-      # Em seguida, instala as demais dependências de requirements.txt.
+      # Passo 3a: Instalar mkdocs-static-files separadamente
+      # Tenta instalar este plugin em um passo dedicado.
+      - name: Instalar Plugin Static Files
+        run: pip install mkdocs-static-files
+
+      # Passo 3b: Instalar as demais dependências do MkDocs e Plugins
+      # Instala as dependências listadas no requirements.txt (que não inclui mkdocs-static-files agora).
       - name: Instalar MkDocs e Tema e Plugins
         run: |
-          echo "Attempting to install mkdocs-static-files separately..."
-          pip install mkdocs-static-files --no-cache-dir --upgrade --force-reinstall || { echo "Failed to install mkdocs-static-files separately, proceeding with requirements.txt"; }
-          echo "Installing dependencies from requirements.txt..."
           pip install -r requirements.txt
           # O plugin mkdocs.plugins.scm (referenciado como 'scm' no mkdocs.yml)
           # é geralmente incluído com o MkDocs, mas causou um erro anterior.
