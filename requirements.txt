@@ -1,0 +1,4 @@
+mkdocs
+mkdocs-material==9.5.20
+mkdocs-include-markdown-plugin
+mkdocs-static-files
