@@ -44,16 +44,24 @@ jobs:
       # Instala o MkDocs (versão compatível com mkdocs-material), o tema e outros plugins.
       - name: Instalar MkDocs e Tema e Plugins
         run: |
-          pip install mkdocs # <<< Removida a fixação de versão para evitar conflito
-          pip install mkdocs-material==9.5.20 # Mantida a fixação de versão do tema
+          pip install mkdocs
+          pip install mkdocs-material==9.5.20
           # Instale outros plugins usados no mkdocs.yml aqui:
-          pip install mkdocs-include-markdown-plugin # Mantido este plugin
+          pip install mkdocs-include-markdown-plugin
 
           # O plugin mkdocs.plugins.scm (referenciado como 'scm' no mkdocs.yml)
           # é geralmente incluído com o MkDocs e não precisa ser instalado separadamente.
-          # pip install mkdocs-plugin-scm # <<< Esta linha foi removida
 
           # Se você adicionar outros plugins no futuro, instale-os aqui também.
+
+      # <<< PASSO DE DIAGNÓSTICO >>>
+      # Este passo roda o comando 'mkdocs plugins' para listar os plugins detectados.
+      # O output deste passo nos ajudará a entender por que o plugin 'scm' não está sendo encontrado.
+      - name: Debug MkDocs Plugins
+        run: |
+          mkdocs --version
+          mkdocs plugins
+      # <<< FIM DO PASSO DE DIAGNÓSTICO >>>
 
       # Passo 4: Construir o Site MkDocs
       # Roda o comando mkdocs build, que lê o mkdocs.yml e os arquivos em /docs.
